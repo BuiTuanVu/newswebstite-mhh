@@ -1,0 +1,322 @@
+
+    <div class="wrapper">
+        <div class="loader-bg">
+            <div class="loader-bar">
+            </div>
+        </div>
+        <!-- Navbar-->
+          {{> navbar}}
+        <!-- Sidebar chat end-->
+        <div class="content-wrapper" id="content">
+            <!-- Container-fluid starts -->
+            <div class="container-fluid">
+                <!-- Header Starts -->
+                <div class="row">
+                    <div class="col-sm-12 p-0">
+                        <div class="main-header">
+                            <h4>Tags</h4>
+                            <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="icofont icofont-home"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Tags</a>
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- Header end -->
+
+
+                <!-- Add new post -->
+                <div class="row">
+                    <!-- Form Control starts -->
+                    <div class="col-lg-4 col-md-12" id="tag">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text" id="header_add">Add New Tag</h5>
+
+                            </div>
+
+                            <!-- end of modal -->
+
+                            <div class="card-block">
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label">Name</label>
+                                        <input type="text" class="form-control" id="TagName" name="TagName"
+                                            aria-describedby="emailHelp" placeholder="">
+                                        <div id="nameWarn"></div>
+                                        <small id="nameHelp" class="form-text text-muted">The name is how it appears on
+                                            your site.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label">Slug</label>
+                                        <input type="text" class="form-control" id="TagSlug" aria-describedby="emailHelp"
+                                            placeholder="">
+                                        <small id="emailHelp" class="form-text text-muted">The "slug" is the
+                                            URL-friendly version of the name. It is usually all lowercase and contains
+                                            only letter, numbers and hyphens.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label">Description</label>
+                                        <textarea name="TagDes" id="TagDes" rows="3" class="form-control"></textarea>
+                                        <small id="emailHelp" class="form-text text-muted">The description is not
+                                            prominent by default; however some themes may show it.</small>
+                                    </div>
+
+
+                                    <button type="submit" id="btnAdd"
+                                        class="btn btn-success waves-effect waves-light m-r-30">ADD</button>
+                                    
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Control ends -->
+
+                    <!-- Textual inputs starts -->
+                    <div class="col-lg-8 col-md-12" id="table">
+                        <!-- Post Overview -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text">Tags</h5>
+                                <div class="col-lg-4 f-right">
+                                    <div class="input-group">
+                                        <input id="btnaddon2" type="text" class="form-control" placeholder="Search Tag"
+                                            aria-describedby="btn-addon2">
+                                        <span class="input-group-btn" id="btn-addon2"><button type="submit"
+                                                class="btn btn-primary shadow-none addon-btn waves-effect waves-light"><i
+                                                    class="icofont icofont-search-alt-2"></i></button></span>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-sm-9 table-responsive">
+                                            <table class="table table-hover" aria-disabled="true">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                        <th>Slug</th>
+
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each this.tags}}
+                                                    <tr>
+
+                                                        <td>{{tag_name}}</td>
+                                                        <td>{{tag_des}}
+                                                        </td>
+                                                        <td>{{tag_slug}}</td>
+
+
+                                                        <td class="td-action">
+
+                                                            <button id="btnEdit" type="button"
+                                                                class="btn btn-mini btn-warning waves-effect waves-light">
+                                                                <i class="icofont icofont-edit-alt"></i>
+                                                            </button>
+
+                                                            <button id="btnDelete" type="button"
+                                                                class="btn btn-mini btn-danger waves-effect waves-light">
+                                                                <i class="icofont icofont-delete-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    {{/each}}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Textual inputs ends -->
+                    </div>
+
+
+                    <!-- Color Picker start -->
+                    <!-- Row start -->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Container-fluid ends -->
+
+
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+		<div class="ie-warning">
+			<h1>Warning!!</h1>
+			<p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+			<div class="iew-container">
+				<ul class="iew-download">
+					<li>
+						<a href="http://www.google.com/chrome/">
+							<img src="/assets/images/browser/chrome.png" alt="Chrome">
+							<div>Chrome</div>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.mozilla.org/en-US/firefox/new/">
+							<img src="/assets/images/browser/firefox.png" alt="Firefox">
+							<div>Firefox</div>
+						</a>
+					</li>
+					<li>
+						<a href="http://www.opera.com">
+							<img src="/assets/images/browser/opera.png" alt="Opera">
+							<div>Opera</div>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.apple.com/safari/">
+							<img src="/assets/images/browser/safari.png" alt="Safari">
+							<div>Safari</div>
+						</a>
+					</li>
+					<li>
+						<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+							<img src="/assets/images/browser/ie.png" alt="">
+							<div>IE (9 & above)</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<p>Sorry for the inconvenience!</p>
+		</div>
+		<![endif]-->
+        <!-- Warning Section Ends -->
+
+        <!-- Required Jqurey -->
+        <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+        <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+
+        <!-- Required Fremwork -->
+        <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- waves effects.js -->
+        <script src="/assets/plugins/Waves/waves.min.js"></script>
+
+        <!-- Scrollbar JS-->
+        <script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+        <!--classic JS-->
+        <script src="/assets/plugins/classie/classie.js"></script>
+
+        <!-- notification -->
+        <script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+        <!-- Date picker.js -->
+        <script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
+        <script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+        <!-- Select 2 js -->
+        <script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+
+        <!-- Max-Length js -->
+        <script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+
+        <!-- Multi Select js -->
+        <script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+        <script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+        <script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+
+        <!-- Tags js -->
+        <script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+        <!-- Bootstrap Datepicker js -->
+        <script type="text/javascript"
+            src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+        <!-- bootstrap range picker -->
+        <script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+        <!-- color picker -->
+        <script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
+        <script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
+
+        <!-- highlite js -->
+        <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+        <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+        <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+        <!-- custom js -->
+        <script type="text/javascript" src="/assets/js/main.min.js"></script>
+        <script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+        <script src="/assets/js/menu.min.js"></script>
+        <script src="/assets/js/dynamic-menu.js"></script>
+        <script>
+            $('#main-navbar').dynamicMenu();
+            DecoupledEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                    const toolbarContainer = document.querySelector('#toolbar-container');
+
+                    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            $(document).ready(function () {
+                $("button#btnEdit").click(function () {
+                    $("#header_add").text("Edit Tag");
+                    $("#btnAdd").slideUp("fast", function () {
+                        $("#btnSave").slideDown("fast");
+                        $("#btnCancel").slideDown("fast");
+                    });
+                });
+                $("#btnSave").click(function () {
+                    if ($("#nameTag").val() == '') {
+                        $("#nameWarn").html('<p id="warn"><code>Please fill out the name of tag</code></p>');
+                            return false;
+                        
+                    }
+                    $("#header_add").text("Edit Tag");
+                    $("#btnSave").slideUp("fast", function () {
+                        $("#btnAdd").slideDown("fast");
+                    });
+                });
+
+                $("#btnCancel").click(function(){
+                    $("#header_add").text("Add New Tag");
+                    
+                    $("#btnSave").slideUp("fast", function () {
+                        $("#btnCancel").slideUp("fast");
+                        $("#btnAdd").slideDown("fast");
+                    });
+                })
+                $("#nameTag").focus(function () {
+                            $("#warn").remove();
+                        });
+
+                $("#btnAdd").click(function () {
+                    if ($("#nameTag").val() == '') {
+                        $("#nameWarn").html('<p id="warn"><code>Please fill out the name of tag</code></p>');
+                        return false;
+                    }
+
+                });
+
+            });
+
+
+        </script>
+
