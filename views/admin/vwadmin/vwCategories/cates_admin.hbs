@@ -1,0 +1,252 @@
+<div class="wrapper">
+    <div class="loader-bg">
+        <div class="loader-bar">
+        </div>
+    </div>
+    <!-- Navbar-->
+    {{> navbar}}
+
+    <!-- Sidebar chat end-->
+    <div class="content-wrapper">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            <!-- Header Starts -->
+            <div class="row">
+                <div class="col-sm-12 p-0">
+                    <div class="main-header">
+                        <h4>Categories</h4>
+                        <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="icofont icofont-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#">Categories</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- Header end -->
+            <!-- Add new post -->
+            <div class="row">
+                <!-- Form Control starts -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-header-text" id="header_add">Add New Category</h5>
+                        </div>
+
+                        <div class="card-block">
+                            <form method="POST">
+                                <div class="form-group">
+                                    <label for="txtCateName" class="form-control-label">Name</label>
+                                    <input type="text" class="form-control" id="txtCateName" name="CateName"
+                                        aria-describedby="cate_name" placeholder="Name of category" autofocus>
+                                    <div id="nameWarn"></div>
+                                    <small id="emailHelp" class="form-text text-muted">The name is how it appears on
+                                        your site</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtCateDes" class="form-control-label">Description</label>
+                                    <textarea name="CateDes" id="txtCateDes" rows="3" class="form-control"
+                                        placeholder="Description about category"></textarea>
+                                    <small id="emailHelp" class="form-text text-muted">The description is not
+                                        prominent by default; however some themes may show it</small>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="cbCates" class="form-control-label">
+                                        Parent
+                                    </label>
+                                    <div style="border:1px">
+                                        <select class="form-control " id="cbCates" name="CateParent">
+                                            <option value="0" selected disabled>--Choose Category--</option>
+                                            {{#each this.categories}}
+                                            <option value="{{cate_id}}">{{cate_name}}</option>
+                                            {{/each}}
+                                        </select>
+                                        <small id="emailHelp" class="form-text text-muted">Categories unlike tags,
+                                            can have a hierarchy. You might have a Life categories and under that
+                                            have children categories.</small>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="cbAuthor" class="form-control-label">Editor</label>
+                                    <select class="form-control " id="cbAuthor" name="CateAuthor">
+                                        <option value="0" disabled>--Choose Editor--</option>
+                                        <option>Vu Bui</option>
+                                        <option>Long Bui</option>
+
+                                    </select>
+                                    <small id="emailHelp" class="form-text text-muted">The person allowed to manage
+                                        posts of categories</small>
+                                </div>
+                                <a name="" id="" class="btn btn-primary" href="/admin/categories/cate_edit" role="button">Categories</a>
+                                <button type="submit" id="btnAdd"
+                                    class="btn btn-success waves-effect waves-light m-r-30 f-right">
+                                    <i class="icofont icofont-check"></i>
+                                    ADD</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Control ends -->
+
+                <!-- Textual inputs starts -->
+                <div class="col-lg-8 col-md-12">
+                    <!-- Post Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-header-text">Categories</h5>
+                            <div class="col-lg-4 f-right">
+                                <div class="input-group">
+                                    <input id="btnaddon2" type="text" class="form-control" placeholder="Search Category"
+                                        aria-describedby="btn-addon2">
+                                    <span class="input-group-btn" id="btn-addon2"><button type="submit"
+                                            class="btn btn-primary shadow-none addon-btn waves-effect waves-light"><i
+                                                class="icofont icofont-search-alt-2"></i></button></span>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-sm-9 table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>Description</th>
+                                                    <th>Parent</th>
+                                                    <th>Posts</th>
+                                                    <th>Editor</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each this.categories}}
+                                                <tr>
+                                                    <td>{{cate_id}}</td>
+                                                    <td>{{cate_name}}</td>
+                                                     <td>{{cate_des}}</td>   
+                                                    <td>{{cate_parent}}</td>
+                                                    <td>20 Posts</td>
+                                                    <td class="td-status">Vu Bui</td>
+                                                    <td class="td-action">
+
+
+                                                        <a class="btn btn-mini btn-warning waves-effect waves-light"
+                                                            href="/admin/categories/cate_edit/{{cate_id}}" role="button">
+                                                            <i class="icofont icofont-edit-alt"></i>
+                                                        </a>
+
+                                                        <button id="btnDelete" type="button" value="btnDelete" onclick="location.href = '/admin/categories/delete/{{cate_id}}'"
+                                                            class="btn btn-mini btn-danger waves-effect waves-light">
+                                                            <i class="icofont icofont-delete-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                {{/each}}
+                                            </tbody>
+
+
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Textual inputs ends -->
+                </div>
+
+
+                <!-- Color Picker start -->
+                <!-- Row start -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid ends -->
+<!-- Required Jqurey -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+
+<!-- Required Fremwork -->
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- waves effects.js -->
+<script src="/assets/plugins/Waves/waves.min.js"></script>
+
+<!-- Scrollbar JS-->
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<!--classic JS-->
+<script src="/assets/plugins/classie/classie.js"></script>
+
+<!-- notification -->
+<script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+<!-- Date picker.js -->
+<script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
+<script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Select 2 js -->
+<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+
+<!-- Max-Length js -->
+<script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+
+<!-- Multi Select js -->
+<script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+<script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+
+<!-- Tags js -->
+<script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+<!-- Bootstrap Datepicker js -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- bootstrap range picker -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- color picker -->
+<script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
+<script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
+
+<!-- highlite js -->
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- custom js -->
+<script type="text/javascript" src="/assets/js/main.min.js"></script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<script src="assets/js/menu.min.js"></script>
+<script src="assets/js/dynamic-menu.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#main-navbar').dynamicMenu();
+
+        $("#btnAdd").click(function () {
+            if ($("#txtCateName").val() == '') {
+                $("#nameWarn").html('<p id="warn"><code>Please fill out the name of tag</code></p>');
+                return false;
+            }
+
+        });
+
+    });
+
+</script>

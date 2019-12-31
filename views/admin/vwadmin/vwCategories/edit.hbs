@@ -1,0 +1,194 @@
+<div class="wrapper">
+    <div class="loader-bg">
+        <div class="loader-bar">
+        </div>
+    </div>
+    <!-- Navbar-->
+    {{> navbar}}
+
+    <!-- Sidebar chat end-->
+    <div class="content-wrapper">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            <!-- Header Starts -->
+            <div class="row">
+                <div class="col-sm-12 p-0">
+                    <div class="main-header">       
+                        <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="icofont icofont-home"></i>
+                                </a>
+                            </li>
+                                <li class="breadcrumb-item"><a href="#">Categories</a>
+                            </li>
+                            </li>
+                                <li class="breadcrumb-item"><a href="#">Edit category</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- Header end -->
+            <!-- Add new post -->
+            <div class="row">
+                <div class="col-lg-3 col-md-12"></div>
+                <!-- Form Control starts -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-header-text" id="header_add">Edit Category</h5>
+                        </div>
+
+                        <div class="card-block">
+
+                            {{#if this.error}}
+                            <div class="alert alert-danger" role="alert">
+                                Invalid ID category! <a href="/admin/categories/cates_admin">Go back</a>
+                            </div>
+                            {{else}}
+                                <form method="POST" action="/admin/categories/update">
+                                <div class="form-group">
+                                    <label for="txtCateName" class="form-control-label">ID</label>
+                                    <input type="text" readonly class="form-control" id="CateID" name="CateID"
+                                        value="{{this.category.cate_id}}"
+                                        aria-describedby="cate_name" placeholder="Name of category" autofocus>
+                                    <div id="nameWarn"></div>
+                                    <small id="emailHelp" class="form-text text-muted">The name is how it appears on
+                                        your site</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CateName" class="form-control-label">Name</label>
+                                    <input type="text" class="form-control" id="CateName" name="CateName" value="{{this.category.cate_name}}"
+                                        aria-describedby="cate_name" placeholder="Name of category" autofocus>
+                                    <div id="nameWarn"></div>
+                                    <small id="emailHelp" class="form-text text-muted">The name is how it appears on
+                                        your site</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CateDes" class="form-control-label">Description</label>
+                                    <textarea name="CateDes" id="CateDes" rows="3" class="form-control"
+                                        aria-valuetext="{{this.category.cate_des}}"
+                                        placeholder="Description about category"></textarea>
+                                    <small id="emailHelp" class="form-text text-muted">The description is not
+                                        prominent by default; however some themes may show it</small>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="cbCates" class="form-control-label">
+                                        Parent
+                                    </label>
+                                    <div style="border:1px">
+                                        <select class="form-control " id="CateParent" name="CateParent" aria-valuetext="{{this.category.cate_parent}}">
+                                            <option value="0" selected disabled>--Choose Category--</option>
+                                            {{#each this.categories }}
+                                            <option value="{{cate_id}}">{{cate_name}}</option>
+                                            {{/each}}
+                                        </select>
+                                        <small id="emailHelp" class="form-text text-muted">Categories unlike tags,
+                                            can have a hierarchy. You might have a Life categories and under that
+                                            have children categories.</small>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="cbAuthor" class="form-control-label">Editor</label>
+                                    <select class="form-control " id="CateAuthor" name="CateAuthor">
+                                        <option value="0" disabled>--Choose Editor--</option>
+                                        <option>Vu Bui</option>
+                                        <option>Long Bui</option>
+
+                                    </select>
+                                    <small id="emailHelp" class="form-text text-muted">The person allowed to manage
+                                        posts of categories</small>
+                                </div>
+                                <a name="" id="" class="btn btn-primary" href="cates_admin" role="button">Categories</a>
+                                <button type="submit" id="btnSave"
+                                    class="btn btn-success waves-effect waves-light m-r-30 f-right">
+                                    <i class="icofont icofont-check"></i>
+                                    SAVE</button>
+                                    
+
+                            </form>
+                            {{/if}}
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid ends -->
+<!-- Required Jqurey -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+
+<!-- Required Fremwork -->
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- waves effects.js -->
+<script src="/assets/plugins/Waves/waves.min.js"></script>
+
+<!-- Scrollbar JS-->
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<!--classic JS-->
+<script src="/assets/plugins/classie/classie.js"></script>
+
+<!-- notification -->
+<script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+<!-- Date picker.js -->
+<script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
+<script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Select 2 js -->
+<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+
+<!-- Max-Length js -->
+<script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+
+<!-- Multi Select js -->
+<script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+<script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+
+<!-- Tags js -->
+<script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+<!-- Bootstrap Datepicker js -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- bootstrap range picker -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- color picker -->
+<script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
+<script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
+
+<!-- highlite js -->
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- custom js -->
+<script type="text/javascript" src="/assets/js/main.min.js"></script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<script src="/assets/js/menu.min.js"></script>
+<script src="/assets/js/dynamic-menu.js"></script>
+<script>
+  
+    $(document).ready(function(){
+        $("#CateDes").text("{{this.category.cate_des}}")
+        $("#CateParent").val("{{this.category.cate_parent}}").change();
+    });
+</script>
