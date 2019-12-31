@@ -1,0 +1,82 @@
+<header id="fixNav">
+		<div class="bg-191">
+			<div class="container">
+				<div class="oflow-hidden color-ash font-9 text-sm-center ptb-sm-5">
+
+					<ul class="float-left float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-10">
+						<li><a class="pl-0 pl-sm-10" href="#">About</a></li>
+						<li><a href="#">Advertise</a></li>
+						<li><a href="#">Submit Press Release</a></li>
+						<li><a href="/user/contact">Contact</a></li>
+					</ul>
+					<form action="/account/logout" id="frmSignout" method="POST"></form>
+					{{#if isAuthenticated}}
+					<ul class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5">
+						<li><a class="pl-0 pl-sm-10" href="javascript: $('#frmSignout').submit();"><i class="fa fa-window-close"> Log out</i></a></li>
+						<li><a href="/account/profile/{{authUser.user_id}}"><i class="fa fa-id-card" aria-hidden="true"> Profile</i></a></li>
+						<li><span>Hi, {{authUser.user_name}}</span></li>
+					</ul>
+
+					{{else}}
+					<ul class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5">
+						<li><a class="pl-0 pl-sm-10" href="/account/login"><i class="fa fa-user"> Log in</i></a></li>
+						<li><a href="/account/register"><i class="fa fa-user-plus" aria-hidden="true"> Sign up</i></a></li>
+						
+					</ul>
+					{{/if}}
+
+				</div><!-- top-menu -->
+			</div><!-- container -->
+		</div><!-- bg-191 -->
+
+		
+		<div class="container" >
+			<a id="logoMenu" class="logo" href="/user/home"><img src="/images/logo-black.png" alt="Logo"></a>
+
+			<a class="right-area src-btn" href="#">
+				<i class="active src-icn ion-search"></i>
+				<i class="close-icn ion-close"></i>
+			</a>
+			<div class="src-form">
+				<form>
+					<input type="text" placeholder="Search here">
+					<button type="submit"><i class="ion-search"></i></a></button>
+				</form>
+			</div><!-- src-form -->
+
+			<a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
+
+			<ul class="main-menu" id="main-menu">
+				
+				{{!-- {{#each this.categories}}
+					<li><a href="">{{cate_name}}</a></li>
+				{{/each}} --}}
+				<li><a href="/user/home"><i class="fa fa-home"></i></a></li>
+				<li><a href="/user/cate/1">POLITICS & LAWS</a></li>
+				<li class="drop-down"><a href="/user/cate/2">BUSINESS<i class="ion-arrow-down-b"></i></a>
+					<ul class="drop-down-menu drop-down-inner">
+						<li><a href="/user/cate/7">ECONOMY</a></li>
+						<li><a href="/user/cate/8">INDUSTRIES</a></li>
+					
+					</ul>
+				</li>
+				<li class="drop-down"><a href="/user/cate/3">TRAVEL<i class="ion-arrow-down-b"></i></a>
+					<ul class="drop-down-menu drop-down-inner">
+						<li><a href="/user/cate/9">PLACES</a></li>
+						<li><a href="/user/cate/10">FOOD</a></li>
+					</ul>
+				</li>
+				<li class="drop-down"><a href="/user/cate/4">LIFE<i class="ion-arrow-down-b"></i></a>
+					<ul class="drop-down-menu drop-down-inner">
+						<li><a href="/user/cate/11">TREND</a></li>
+						<li><a href="/user/cate/12">CULTURE</a></li>
+						<li><a href="/user/cate/13">STYLE</a></li>			
+					</ul>
+				</li>
+				<li><a href="/user/cate/5">SPORTS </a></li>
+				<li><a href="/user/cate/6">WORLD</a></li>				
+				
+			</ul>
+			<div class="clearfix"></div>
+		</div><!-- container -->
+	</header>
