@@ -1,0 +1,430 @@
+<div class="wrapper">
+    <div class="loader-bg">
+        <div class="loader-bar">
+        </div>
+    </div>
+    <!-- Navbar-->
+    {{> navbar}}
+    <!-- Sidebar chat end-->
+    <div class="content-wrapper">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12 p-0">
+                    <div class="main-header">
+                        <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="icofont icofont-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#">Posts</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="basic-table.html">All Posts</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- Header end -->
+
+            <!-- Start showing posts -->
+            <div class="row box-shadow">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row f-right">
+                                <div class="col-sm-2">
+                                    <h5 class="card-header-text">All Drafts</h5>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <select name="Status" id="Status" class="form-control" style="height:35px">
+                                            <option disabled selected value="">Status</option>
+                                            <option value="0">Pending</option>
+                                            <option value="1">Published</option>
+                                            <option value="-1">Rejected</option>
+                                        </select>
+                                        <span class="input-group-btn" id="btn-addon2"><button type="button" id="sttSrc"
+                                                class="btn btn-inverse-success shadow-none addon-btn waves-effect waves-light"><i
+                                                    class="icofont icofont-document-search"></i></button></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <select name="Cates" id="Cates" class="form-control" style="height:35px">
+                                            <option value="" disabled selected>Categories</option>
+                                            {{#each this.cates}}
+
+                                            <option value="{{cate_id}}">{{cate_name}}</option>
+                                            {{/each}}
+
+                                        </select>
+                                        <span class="input-group-btn" id="btn-addon2">
+                                            <a name="cateSrc" id="cateSrc"
+                                                class="btn btn-inverse-success shadow-none addon-btn waves-effect waves-light"
+                                                role="button">
+                                                <i class="icofont icofont-document-search"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <select name="" id="" class="form-control" style="height:35px">
+                                            <option value="" selected>Today</option>
+                                            <option value="1">Yesterday</option>
+                                            <option value="2">Last 7 Days</option>
+                                            <option value="3">This Month</option>
+                                            <option value="4">Last Month</option>
+                                        </select>
+                                        <span class="input-group-btn" id="btn-addon2"><button type="button"
+                                                class="btn btn-inverse-default shadow-none addon-btn waves-effect waves-light"><i
+                                                    class="icofont icofont-calendar"></i></button></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input id="btnaddon2" type="text" class="form-control"
+                                            placeholder="Search posts" aria-describedby="btn-addon2">
+                                        <span class="input-group-btn" id="btn-addon2"><button type="button"
+                                                class="btn btn-inverse-success shadow-none addon-btn waves-effect waves-light"><i
+                                                    class="icofont icofont-document-search"></i></button></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button id="btnView" type="button" class="btn btn-primary waves-effect waves-light">
+                                        <i class="icofont icofont-search-alt-2"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- end of modal -->
+
+                        <div class="card-block box-list ">
+                            <div class="row">
+                                {{#each this.posts}}
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="z-depth-top-0 waves-effect" style="height: 400px">
+                                        <img class="card-img-top" src="{{post_image}}" alt="Card image cap"
+                                            style="height: 160px; width: 100%; display: block;">
+                                        <div class="generic-card-body p-10">
+                                            <h5 class="card-title">{{post_title}}</h5>
+                                            <p class="card-text">{{post_des}}</p>
+                                            <p class="card-text"><small class="text-muted">{{post_cate_id}} |
+                                                    {{post_date}}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                            <div class="row f-right">
+                                <div class="col-sm-12">
+                                    <nav aria-label="...">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1"
+                                                    aria-disabled="true">Previous</a>
+                                            </li>
+                                            {{#each this.pages}}
+                                            {{#if active}}
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link" href="javascript:;">{{value}} <span
+                                                        class="sr-only">(current)</span></a>
+                                            </li>
+                                            {{else}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{value}}">{{value}}</a>
+                                            </li>
+                                            {{/if}}
+                                            {{/each}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- end of card-content -->
+                    </div>
+                    <!-- end of card-main -->
+                </div>
+                <!-- end of col-sm-12 -->
+            </div>
+
+
+            <div class="row" id="editPost" style="display:none">
+                <!-- Form Control starts -->
+                <div class="col-lg-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-header-text">Edit Post</h5>
+
+                        </div>
+
+                        <!-- end of modal -->
+
+                        <div class="card-block">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="form-control-label">Title</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="form-control-label">Description</label>
+                                    <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="form-control-label">Content</label>
+                                    <div id="toolbar-container"></div>
+
+                                    <!-- This container will become the editable. -->
+                                    <div id="editor" style="border: 1px solid #ccc">
+                                        <p>This is the initial editor content.</p>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1" class="form-control-label">Author</label>
+                                    <select class="form-control " id="exampleSelect1">
+                                        <option value="0" disabled>--Choose author--</option>
+                                        <option>Vu Bui</option>
+                                        <option>Long Bui</option>
+
+                                    </select>
+                                </div>
+
+
+
+
+                                <button type="button" id="btnEdit"
+                                    class="btn btn-primary waves-effect waves-light m-r-30 ">SAVE</button>
+
+                                <button type="button" id="btnCancel"
+                                    class="btn btn-warning waves-effect waves-light m-r-30">CANCEL</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Control ends -->
+
+                <!-- Textual inputs starts -->
+                <div class="col-lg-3 col-md-12">
+                    <!-- Post Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="m-0">Actions</h6>
+                        </div>
+                        <div class="card-block">
+
+                            <div class="form-group">
+                                <i class="icofont icofont-flag-alt-1"></i>
+                                <strong class="mr-1">Status:</strong> Draft
+                                <a class="ml-auto text-right f-right" href="#">Edit</a>
+                            </div>
+                            <div class="form-group">
+                                <i class="icofont icofont-invisible"></i>
+                                <strong class="mr-1">Visibility:</strong>
+                                <strong class="text-success">Public</strong>
+                                <a class="ml-auto f-right" href="#">Edit</a>
+                            </div>
+                            <div class="form-group">
+                                <i class="icofont icofont-calendar"></i>
+                                <strong class="mr-1">Schedule:</strong> Now
+                                <a class="ml-auto f-right" href="#">Edit</a>
+                            </div>
+                            <div class="form-group">
+                                <i class="icofont icofont-score-board"></i>
+                                <strong class="mr-1">Readability:</strong>
+                                <strong class="text-warning">Ok</strong>
+                            </div>
+
+
+                            <button class="btn btn-sm btn-inverse-default">
+                                <i class="icofont icofont-save"></i> Save Draft</button>
+
+
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- / Post Overview -->
+                    <!-- Post Overview -->
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h6 class="m-0">Categories And Tags</h6>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group">
+                                <label for="" class="form-control-label">
+                                    Categories
+                                </label>
+                                <div style="border:1px">
+                                    <select id="example-enableClickableOptGroups" multiple="multiple">
+                                        <optgroup label="Business">
+                                            <option value="1-1">Economy</option>
+                                            <option value="1-2">Industries</option>
+                                            <option value="1-3">Companies</option>
+                                            <option value="1-4">DataSpeak</option>
+                                        </optgroup>
+                                        <optgroup label="Travel">
+                                            <option value="2-1">Places</option>
+                                            <option value="2-2">Food</option>
+
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="form-control-label">Tags</label></br>
+                                <div class="tags_max_char">
+                                    <div class="bootstrap-tagsinput"><span class="tag label label-info">Amsterdam<span
+                                                data-role="remove"></span></span> <span
+                                            class="tag label label-info">Washington<span
+                                                data-role="remove"></span></span> <span
+                                            class="tag label label-info">Sydney<span data-role="remove"></span></span>
+                                        <input type="text" placeholder="Enter tags for post"></div><input class=""
+                                        type="text" value="Amsterdam,Washington,Sydney" data-role="tagsinput"
+                                        style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Post Overview -->
+                </div>
+                <!-- Textual inputs ends -->
+            </div>
+
+            <!-- Row end -->
+            <!-- Tables end -->
+        </div>
+
+        <!-- Container-fluid ends -->
+    </div>
+</div>
+
+
+<!-- Required Jqurey -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+
+<!-- Required Fremwork -->
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- waves effects.js -->
+<script src="/assets/plugins/Waves/waves.min.js"></script>
+
+<!-- Scrollbar JS-->
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<!--classic JS-->
+<script src="/assets/plugins/classie/classie.js"></script>
+
+<!-- notification -->
+<script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+<!-- Date picker.js -->
+<script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
+<script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Select 2 js -->
+<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+
+<!-- Max-Length js -->
+<script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+
+<!-- Multi Select js -->
+<script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+<script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+
+<!-- Tags js -->
+<script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+<!-- Bootstrap Datepicker js -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- bootstrap range picker -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- color picker -->
+<script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
+<script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
+
+<!-- highlite js -->
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- custom js -->
+<script type="text/javascript" src="/assets/js/main.min.js"></script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<script src="/assets/js/menu.min.js"></script>
+<script src="/assets/js/dynamic-menu.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#cateSrc").on("click", function (event) {
+            var p = $('#Cates').val();
+
+          
+            window.location.href = '/admin/posts/searchCate/' + p;
+            event.preventDefault(); // This is for preventing the default behavior of links 
+
+        });
+
+        $("#sttSrc").on("click", function (event) {
+
+
+            var p = $('#Status').val();
+            window.location.href = '/admin/posts/searchStatus/' + p;
+            event.preventDefault();
+        });
+
+        $("#Cates").val("{{this.cate}}").change();
+        $("#Status").val("{{this.stt}}").change();
+
+
+        $('#main-navbar').dynamicMenu();
+
+        $('#child-one').dynamicMenu();
+
+        if ($('#child-one li').hasClass('active')) {
+            $('#child-one').addClass('menu-open').css({ 'display': 'block' });
+        }
+
+        DecoupledEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                const toolbarContainer = document.querySelector('#toolbar-container');
+
+                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        
+        
+
+    });
+
+</script>
