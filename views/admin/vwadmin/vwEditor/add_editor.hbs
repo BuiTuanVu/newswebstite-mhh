@@ -1,0 +1,360 @@
+<div class="wrapper">
+    <div class="loader-bg">
+        <div class="loader-bar">
+        </div>
+    </div>
+    <!-- Navbar-->
+    {{> navbar}}
+    <div class="content-wrapper" id="edit-form" style="">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="main-header">
+
+                    <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="icofont icofont-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Extras</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="profile.html">Profile</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- Header end -->
+            <div class="row">
+
+                <div class="col-xl-12 col-lg-6">
+                    <!-- Nav tabs -->
+                    <div class="tab-header">
+                        <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#personal" role="tab">Personal
+                                    Info</a>
+                                <div class="slide"></div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- end of tab-header -->
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="personal" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">About Me</h5>
+                                    <button id="edit-btn" type="button"
+                                        class="btn btn-primary waves-effect waves-light f-right">
+                                        <i class="icofont icofont-edit"></i>
+                                    </button>
+                                </div>
+                                <div class="card-block">
+
+                                    <!-- end of view-info -->
+
+                                    <div class="edit-info">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <form action="" method="POST">
+                                                    <div class="general-info">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-ui-browser"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <input type="text" id="UserAccount"
+                                                                                            name="UserAccount"
+                                                                                            class="md-form-control md-static"
+                                                                                            value="{{curUser.user_account}}">
+                                                                                        <label>User name</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-ui-user"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <input type="text" id="UserName"
+                                                                                            name="UserName"
+                                                                                            class="md-form-control md-static"
+                                                                                            value="{{curUser.user_name}}">
+                                                                                        <label>Full name</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+
+
+
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-group-students"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <select id="UserSex"
+                                                                                            name="UserSex"
+                                                                                            class="md-form-control md-static">
+                                                                                            <option selected disabled>
+                                                                                                Sexual
+                                                                                            </option>
+                                                                                            <option value="0">Male</option>
+                                                                                            <option value="1">Female</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        {{!-- <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-ui-calendar"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <input type="text" id="UserDOB"
+                                                                                            name="UserDOB"
+                                                                                            class="md-form-control md-static"
+                                                                                            value="{{curUser.user_dob}}">
+                                                                                        <label>Birthday Date</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr> --}}
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-users-alt-4"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <select
+                                                                                            class="md-form-control md-static"
+                                                                                            id="UserRole"
+                                                                                            name="UserRole">
+                                                                                            <option selected disabled>
+                                                                                                Role
+                                                                                            </option>
+                                                                                            <option value="1">Writer</option>
+                                                                                            <option value="2">Editor</option>
+                                                                                            <option value="3">Admin</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!-- end of table col-lg-6 -->
+
+                                                            <div class="col-lg-6">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                            <tr>
+                                                                                    <td>
+                                                                                        <div class="md-group-add-on form-group">
+                                                                                            <span class="md-add-on">
+                                                                                                <i
+                                                                                                    class="icofont icofont-key-hole"></i>
+                                                                                            </span>
+                                                                                            <div class="md-input-wrapper">
+                                                                                                <input type="text" id="UserCMND"
+                                                                                                    name="UserCMND"
+                                                                                                    class="md-form-control md-static"
+                                                                                                    value="{{curUser.user_account}}">
+                                                                                                <label>Identity Card</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+        
+                                                                                </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-email"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <input type="email"
+                                                                                            id="UserMail"
+                                                                                            name="UserMail"
+                                                                                            value="{{curUser.user_mail}}"
+                                                                                            class="md-form-control md-static">
+                                                                                        <label>Email</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-mobile-phone"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <input type="text"
+                                                                                            id="UserPhone"
+                                                                                            name="UserPhone"
+                                                                                            value="{{curUser.user_phone}}"
+                                                                                            class="md-form-control md-static">
+                                                                                        <label>Mobile Number</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="md-group-add-on form-group">
+                                                                                    <span class="md-add-on">
+                                                                                        <i
+                                                                                            class="icofont icofont-location-pin"></i>
+                                                                                    </span>
+                                                                                    <div class="md-input-wrapper">
+                                                                                        <textarea
+                                                                                            class="md-form-control md-static"
+                                                                                            id="UserAddress"
+                                                                                            name="UserAddress" cols="2"
+                                                                                            rows="1"></textarea>
+                                                                                        <label>Address</label>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+
+
+
+                                                            <!-- end of table col-lg-6 -->
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button type="submit"
+                                                                class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
+                                                                <button type="button" id="edit-cancel"
+                                                                    class="btn btn-default waves-effect">Cancel</a>
+                                                        </div>
+                                                </form>
+                                                <!-- end of row -->
+
+                                            </div>
+                                            <!-- end of edit info -->
+                                        </div>
+                                        <!-- end of col-lg-12 -->
+                                    </div>
+                                    <!-- end of row -->
+
+                                </div>
+                                <!-- end of view-info -->
+                            </div>
+                            <!-- end of card-block -->
+                        </div>
+                        <!-- end of card-->
+
+
+                        <!-- end of row of education and experience  -->
+
+
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of tab-pane -->
+                    <!-- end of about us tab-pane -->
+
+
+
+
+
+
+                </div>
+                <!-- end of main tab content -->
+            </div>
+        </div>
+
+    </div>
+    <!-- Container-fluid ends -->
+</div>
+</div>
+
+<!-- Required Jqurey -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+
+<!-- Required Fremwork -->
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- waves effects.js -->
+<script src="/assets/plugins/Waves/waves.min.js"></script>
+
+<!-- Scrollbar JS-->
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+
+
+<!--  -->
+
+
+
+<!--classic JS-->
+<script src="/assets/plugins/classie/classie.js"></script>
+
+<!-- notification -->
+<script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+<!--  -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- bootstrap range picker -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<!-- custom js -->
+<script type="text/javascript" src="/assets/js/main.min.js"></script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<script type="text/javascript" src="/assets/pages/elements.js"></script>
+<script src="/assets/js/menu.min.js"></script>
+<script src="/assets/js/dynamic-menu.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        $('#main-navbar').dynamicMenu();
+        $("#UserAddress").text("{{this.curUser.user_address}}")
+        $("#CateParent").val("{{this.category.cate_parent}}").change();
+    });
+</script>

@@ -12,12 +12,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-require('./middleware/view-engine')(app);
-require('./middleware/upload')(app);
-require('./middleware/session')(app);
-require('./middleware/passport')(app);
+require('./middeware/view-engine')(app);
+require('./middeware/upload')(app);
+require('./middeware/session')(app);
+require('./middeware/passport')(app);
 
-app.use(require('./middleware/auth-local'));
+app.use(require('./middeware/auth-local'));
 
 app.use('/admin/posts', require('./routes/admin/post_writer_router'));
 app.use('/admin/drafts', require('./routes/admin/draft_editor_router'));

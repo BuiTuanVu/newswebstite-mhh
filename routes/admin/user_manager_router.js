@@ -2,7 +2,7 @@ var express = require('express');
 var userModel = require('../../models/user.model');
 const bodyParser = require('body-parser');
 var router = express.Router();
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt');
 
 router.get('/editors', (req, res) => {
     var p = userModel.allEditor();
@@ -23,7 +23,7 @@ router.get('/editors/add', (req, res) => {
 router.post('/editors/add', (req, res) => {
 
     var saltRounds = 10;
-    var hash = bcrypt.hashSync(req.body.UserCMND, saltRounds);
+  var hash = bcrypt.hashSync(req.body.UserCMND, saltRounds);
     var entity = {
 
         user_account: req.body.UserAccount,
@@ -80,7 +80,7 @@ router.get('/editors/edit/:id', (req, res) => {
 
 router.post('/editors/update/:id', (req, res) => {
 
-
+    
     var entity = {
         user_id: req.params.id,
         user_name: req.body.UserName,

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="/plugin-frameworks/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="plugin-frameworks/bootstrap-social.css">
+
+    <link href="/fonts/ionicons.css" rel="stylesheet">
+
+    <link href="/common/styles.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+
+    <div class="container future-post">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+
+                <article class="card-body">
+                    <a href="signup" class="float-right btn btn-outline-primary">Sign up</a>
+                    <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                    <p>
+                        <a href="https://accounts.google.com/ServiceLogin/identifier?passive=1209600&continue=https%3A%2F%2Faccounts.google.com%2FManageAccount%3Fhl%3Dvi&followup=https%3A%2F%2Faccounts.google.com%2FManageAccount%3Fhl%3Dvi&hl=vi&flowName=GlifWebSignIn&flowEntry=AddSession"
+                            class="btn btn-block btn-google" style="text-align: center"> <i class="fab fa-google"></i>
+                            &nbsp; Login via Google</a>
+                        <a href="https://www.facebook.com/login/" class="btn btn-block btn-facebook"> <i
+                                class="fab fa-facebook-f"></i> &nbsp; Login via facebook</a>
+
+                    </p>
+                    <hr>
+                    {{#if err_message}}
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						{{err_message}}
+					</div>
+					{{/if}}
+                    <form method="POST">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                <input name="username" class="form-control" placeholder="Username" type="text">
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group// -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input class="form-control" placeholder="Password" type="password" name="password">
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group// -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                                </div> <!-- form-group// -->
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a class="small" href="#">Forgot password?</a>
+                            </div>
+                        </div> <!-- .row// -->
+                    </form>
+                </article>
+            </div> <!-- card.// -->
+        </div>
+    </div>
+</div>  <script src="/plugin-frameworks/jquery-3.2.1.min.js"></script>
+
+<script src="/plugin-frameworks/tether.min.js"></script>
+
+<script src="/plugin-frameworks/bootstrap.js"></script>
+
+<script src="/common/scripts.js"></script>
+
+
+</body>
+
+</html>
