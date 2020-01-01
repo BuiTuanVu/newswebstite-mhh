@@ -11,9 +11,22 @@ app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./middleware/view-engine')(app);// view engine hbs
 
+require('./middleware/view-engine')(app);
+require('./middleware/upload')(app);
+require('./middleware/session')(app);
+require('./middleware/passport')(app);
 
+app.use(require('./middleware/auth-local'));
+
+app.use('/admin/posts', require('./routes/admin/post_writer_router'));
+app.use('/admin/drafts', require('./routes/admin/draft_editor_router'));
+app.use('/admin/categories', require('./routes/admin/category_route'));
+
+app.use('/admin/users', require('./routes/admin/user_manager_router'));
+app.use('/admin/posts_admin', require('./routes/admin/post_admin_router'));
+app.use('/admin/tags', require('./routes/admin/admin_tags_router'));
+app.use('/user', require('./routes/user/client.router'))
 
 app.use('/admin', require('./routes/admin/admin_router'));
 app.use('/account', require('./routes/account.router'));
