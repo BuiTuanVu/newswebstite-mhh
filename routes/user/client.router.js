@@ -3,20 +3,39 @@ var cateModel = require('../../models/category.model');
 var postModel = require('../../models/post.client.model');
 var router = express.Router();
 
-router.get('/home', (req, res, next) => {    
+
+router.get('/', (req, res, next) => {
     Promise.all([
         postModel.newestEachCate(),
         postModel.topView(10),
-        postModel.preView(1,0),
-        postModel.preView(2,1),
-        postModel.preView(3,3),
-        postModel.recentNews(4, 0), 
+        postModel.preView(1, 0),
+        postModel.preView(2, 1),
+        postModel.preView(3, 3),
+        postModel.recentNews(4, 0),
         postModel.recentNews(6, 4)]).then(([newestEachCate, topViews, topViews01, topViews02, topViews03, recentNews01, recentNews02]) => {
 
-        res.render('user/home', { title: 'HOME', newestEachCate, topViews, topViews01, topViews02,topViews03, recentNews01, recentNews02  });
-    }).catch(err => {
-        res.end(err);
-    });
+            res.render('user/home', { title: 'HOME', newestEachCate, topViews, topViews01, topViews02, topViews03, recentNews01, recentNews02 });
+        }).catch(err => {
+            res.end(err);
+        });
+
+
+});
+
+router.get('/home', (req, res, next) => {
+    Promise.all([
+        postModel.newestEachCate(),
+        postModel.topView(10),
+        postModel.preView(1, 0),
+        postModel.preView(2, 1),
+        postModel.preView(3, 3),
+        postModel.recentNews(4, 0),
+        postModel.recentNews(6, 4)]).then(([newestEachCate, topViews, topViews01, topViews02, topViews03, recentNews01, recentNews02]) => {
+
+            res.render('user/home', { title: 'HOME', newestEachCate, topViews, topViews01, topViews02, topViews03, recentNews01, recentNews02 });
+        }).catch(err => {
+            res.end(err);
+        });
 
 
 });
@@ -25,8 +44,8 @@ router.get('/home', (req, res, next) => {
 router.get('/cate/:id', (req, res) => {
 
     postModel.cateChild(req.params.id).then(p => {
-        
-        
+
+
         if (p.length > 0) {
 
             var child1 = parseInt((p[0].cate_id).toString())
@@ -39,8 +58,8 @@ router.get('/cate/:id', (req, res) => {
             var offset = (page - 1) * limit;
 
             Promise.all([postModel.topView(5),
-                postModel.getCateName(p[0].cate_parent),postModel.pageByCat(child1, limit/2, offset), postModel.pageByCat(child2, limit/2, offset),
-            postModel.countByCat(child1), postModel.countByCat(child2)]).then(([topView,cate,rows01, rows02, count_rows01, count_rows02]) => {
+            postModel.getCateName(p[0].cate_parent), postModel.pageByCat(child1, limit / 2, offset), postModel.pageByCat(child2, limit / 2, offset),
+            postModel.countByCat(child1), postModel.countByCat(child2)]).then(([topView, cate, rows01, rows02, count_rows01, count_rows02]) => {
 
                 var total = (count_rows01[0]).total + (count_rows02[0]).total;
                 var nPages = Math.floor(total / limit);
@@ -50,8 +69,8 @@ router.get('/cate/:id', (req, res) => {
                     var obj = { value: i, active: i === +page };
                     pages.push(obj);
                 }
-                
-                res.render('user/posts', {topView, rows01, rows02 , pages, isParent: true , cate: cate[0].cate_name})
+
+                res.render('user/posts', { topView, rows01, rows02, pages, isParent: true, cate: cate[0].cate_name })
             }).catch(err => {
                 console.log(err);
             })
@@ -68,8 +87,8 @@ router.get('/cate/:id', (req, res) => {
             var offset = (page - 1) * limit;
 
             Promise.all([postModel.topView(5),
-                postModel.getCateName(idCate),postModel.pageByCat(idCate, limit, offset),
-            postModel.countByCat(idCate)]).then(([topView,catename,rows, count_rows]) => {
+            postModel.getCateName(idCate), postModel.pageByCat(idCate, limit, offset),
+            postModel.countByCat(idCate)]).then(([topView, catename, rows, count_rows]) => {
                 var q = cateModel.all();
                 q.then(cates => {
                     var total = count_rows[0].total;
@@ -80,7 +99,7 @@ router.get('/cate/:id', (req, res) => {
                         var obj = { value: i, active: i === +page };
                         pages.push(obj);
                     }
-                    res.render('user/posts', {topView,cate: catename[0].cate_name, posts: rows, cates: cates, pages , isParent: false})
+                    res.render('user/posts', { topView, cate: catename[0].cate_name, posts: rows, cates: cates, pages, isParent: false })
                 }).catch(err => {
                     console.log(err)
                 });
@@ -132,16 +151,12 @@ router.get('/posts/:id', (req, res) => {
             res.render('user/single_post', { title: 'NEWS', post: rows[0], relatedPosts: relatedPosts });
         })
 
-        
+
     }).catch(err => {
         console.log(err)
     });
 });
 
-
-router.get('/home', (req, res, next) => {
-    res.render('user/home', { title: 'HOME' });
-});
 router.get('/login', (req, res, next) => {
     res.render('admin/login1', { layout: "admin" });
 });

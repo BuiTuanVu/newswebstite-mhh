@@ -9,11 +9,6 @@ router.get('/cates_admin', (req, res, next) => {
     var p = categoryModel.all();
     p.then(rows => {
         console.log(rows);
-        // // var q = categoryModel.allCateNoChild();
-        // // // q.then(rowsv => {
-        // // //     console.log(rowsv);
-        // // //     res.render('admin/categories/cates_admin',{layout: 'admin', categories: rows, catenochild: rowsv});
-        // });
         res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows });
 
     }).catch(err => {
@@ -29,7 +24,7 @@ router.post('/cates_admin', (req, res) => {
     }
 
     categoryModel.add(entity).then(id => {
-        
+
         var p = categoryModel.all();
         p.then(rows => {
             res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows });
@@ -58,10 +53,10 @@ router.get('/cate_edit/:id', (req, res, next) => {
                     error: false,
                     category: rows[0],
                     layout: 'admin',
-                    
+
                 });
             })
-            
+
         } else {
             res.render('admin/vwAdmin/vwCategories/edit', {
                 error: true,
@@ -70,7 +65,7 @@ router.get('/cate_edit/:id', (req, res, next) => {
         }
     }).catch(err => {
         console.log(err);
-            res.end('error occured.');
+        res.end('error occured.');
     });
 
 });
@@ -92,7 +87,7 @@ router.post('/update', (req, res) => {
 
 router.get('/delete/:id', (req, res) => {
     console.log(req.params.id);
-    categoryModel.delete(req.params.id).then( n=> {
+    categoryModel.delete(req.params.id).then(n => {
         res.redirect('/admin/categories/cates_admin');
     }).catch(err => {
         console.log(err);

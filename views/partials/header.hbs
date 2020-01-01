@@ -15,6 +15,7 @@
 						<li><a class="pl-0 pl-sm-10" href="javascript: $('#frmSignout').submit();"><i class="fa fa-window-close"> Log out</i></a></li>
 						<li><a href="/account/profile/{{authUser.user_id}}"><i class="fa fa-id-card" aria-hidden="true"> Profile</i></a></li>
 						<li><span>Hi, {{authUser.user_name}}</span></li>
+						<li><span>Hi, {{authUser.user_role}}</span></li>
 					</ul>
 
 					{{else}}

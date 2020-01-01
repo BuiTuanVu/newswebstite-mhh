@@ -4,10 +4,10 @@
  File: main.js
  */
 'use strict';
-$(window).on('load', function() {
+$(window).on('load', function () {
     var $window = $(window);
-    $('.loader-bar').animate({ width:$window.width()},2000);
-    setTimeout(function() {
+    $('.loader-bar').animate({ width: $window.width() }, 2000);
+    setTimeout(function () {
         while ($('.loader-bar').width() == $window.width()) {
             removeloader();
             break;
@@ -39,7 +39,7 @@ $(window).on('load', function() {
         });
     };
 
-    notify('Welcome to Able Admin', 'inverse');
+    notify('Welcome to New247 ADMIN', 'inverse');
     $('.loader-bg').fadeOut('slow');
 
 });
@@ -48,10 +48,10 @@ $(window).on('load', function() {
 //         $('.loader-bg').remove();
 //     });
 // };
-$(document).ready(function() {
+$(document).ready(function () {
 
     //sidebar dropdown open
-    $(".designation").on('click', function() {
+    $(".designation").on('click', function () {
         $(".extra-profile-list").slideToggle();
     });
 
@@ -66,10 +66,10 @@ $(document).ready(function() {
     });
 
     // search
-    $("#search-friends").on("keyup", function() {
+    $("#search-friends").on("keyup", function () {
 
         var g = $(this).val().toLowerCase();
-        $(".friendlist-box .media-body .friend-header").each(function() {
+        $(".friendlist-box .media-body .friend-header").each(function () {
 
             var s = $(this).text().toLowerCase();
             $(this).closest('.friendlist-box')[s.indexOf(g) !== -1 ? 'show' : 'hide']();
@@ -77,7 +77,7 @@ $(document).ready(function() {
     });
 
     // open chat box
-    $('.displayChatbox').on('click', function() {
+    $('.displayChatbox').on('click', function () {
 
         var options = {
             direction: 'right'
@@ -85,7 +85,7 @@ $(document).ready(function() {
         $('.showChat').toggle('slide', options, 500);
     });
     //open friend chat
-    $('.friendlist-box').on('click', function() {
+    $('.friendlist-box').on('click', function () {
 
 
         var options = {
@@ -94,7 +94,7 @@ $(document).ready(function() {
         $('.showChat_inner').toggle('slide', options, 500);
     });
     //back to main chatbar
-    $('.back_chatBox').on('click', function() {
+    $('.back_chatBox').on('click', function () {
         var options = {
             direction: 'right'
         };
@@ -103,7 +103,7 @@ $(document).ready(function() {
     });
     /*chatbar js start*/
 
-    $("[data-toggle='utility-menu']").on('click', function() {
+    $("[data-toggle='utility-menu']").on('click', function () {
         $(this).next().slideToggle(300);
         $(this).toggleClass('open');
         return false;
@@ -134,10 +134,10 @@ Waves.attach('.flat-buttons', ['waves-button', 'waves-float', 'waves-light', 'fl
 
 // side button js code start
 $.pushMenu = {
-    activate: function(toggleBtn) {
+    activate: function (toggleBtn) {
 
         //Enable sidebar toggle
-        $(toggleBtn).on('click', function(e) {
+        $(toggleBtn).on('click', function (e) {
             e.preventDefault();
 
             //Enable sidebar push menu
@@ -166,7 +166,7 @@ $.pushMenu = {
             };
         });
 
-        $(".content-wrapper").on('click', function() {
+        $(".content-wrapper").on('click', function () {
             //Enable hide menu when clicking on the content-wrapper on small screens
             if ($(window).width() <= (767) && $("body").hasClass("sidebar-open")) {
                 $("body").removeClass('sidebar-open');
@@ -174,10 +174,10 @@ $.pushMenu = {
         });
     }
 };
-$.tree = function(menu) {
+$.tree = function (menu) {
     var _this = this;
     var animationSpeed = 200;
-    $(document).on('click', menu + ' li a', function(e) {
+    $(document).on('click', menu + ' li a', function (e) {
         //Get the clicked link and the next element
         var $this = $(this);
         var checkElement = $this.next();
@@ -185,7 +185,7 @@ $.tree = function(menu) {
         //Check if the next element is a menu and is visible
         if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
             //Close the menu
-            checkElement.slideUp(animationSpeed, function() {
+            checkElement.slideUp(animationSpeed, function () {
                 checkElement.removeClass('menu-open');
                 //Fix the layout in case the sidebar stretches over the height of the window
                 //_this.layout.fix();
@@ -204,7 +204,7 @@ $.tree = function(menu) {
             var parent_li = $this.parent("li");
 
             //Open the target menu and add the menu-open class
-            checkElement.slideDown(animationSpeed, function() {
+            checkElement.slideDown(animationSpeed, function () {
                 //Add the class active to the parent li
                 checkElement.addClass('menu-open');
                 parent.find('li.active').removeClass('active');
@@ -224,7 +224,7 @@ $.pushMenu.activate("[data-toggle='offcanvas']");
 
 
 /* Search header start */
-(function() {
+(function () {
     var isAnimating;
     var morphSearch = document.getElementById('morphsearch'),
         input = morphSearch.querySelector('input.morphsearch-input'),
@@ -232,7 +232,7 @@ $.pushMenu.activate("[data-toggle='offcanvas']");
         isOpen = isAnimating = false,
         isHideAnimate = morphsearch.querySelector('.morphsearch-form'),
         // show/hide search area
-        toggleSearch = function(evt) {
+        toggleSearch = function (evt) {
             // return if open and the input gets focused
             if (evt.type.toLowerCase() === 'focus' && isOpen) return false;
 
@@ -243,9 +243,9 @@ $.pushMenu.activate("[data-toggle='offcanvas']");
                 // trick to hide input text once the search overlay closes
                 // todo: hardcoded times, should be done after transition ends
                 //if( input.value !== '' ) {
-                setTimeout(function() {
+                setTimeout(function () {
                     classie.add(morphSearch, 'hideInput');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         classie.add(isHideAnimate, 'p-absolute');
                         classie.remove(morphSearch, 'hideInput');
                         input.value = '';
@@ -266,7 +266,7 @@ $.pushMenu.activate("[data-toggle='offcanvas']");
     ctrlClose.addEventListener('click', toggleSearch);
     // esc key closes search overlay
     // keyboard navigation events
-    document.addEventListener('keydown', function(ev) {
+    document.addEventListener('keydown', function (ev) {
         var keyCode = ev.keyCode || ev.which;
         if (keyCode === 27 && isOpen) {
             toggleSearch(ev);
@@ -276,7 +276,7 @@ $.pushMenu.activate("[data-toggle='offcanvas']");
     morphSearch_search.addEventListener('click', toggleSearch);
 
     /***** for demo purposes only: don't allow to submit the form *****/
-    morphSearch.querySelector('button[type="submit"]').addEventListener('click', function(ev) {
+    morphSearch.querySelector('button[type="submit"]').addEventListener('click', function (ev) {
         ev.preventDefault();
     });
 })();
@@ -307,7 +307,7 @@ function toggleFullScreen() {
 // viral
 // chat-sidebar
 var ost = 0;
-$(window).scroll(function() {
+$(window).scroll(function () {
     var $window = $(window);
     var windowHeight = $(window).innerHeight();
     if ($window.width() <= 767) {
@@ -322,8 +322,8 @@ $(window).scroll(function() {
 });
 
 // Start [ Menu-bottom ]
-$(document).ready(function() {
-    $(".dropup-mega, .dropup").hover(function() {
+$(document).ready(function () {
+    $(".dropup-mega, .dropup").hover(function () {
         var dropdownMenu = $(this).children(".dropdown-menu");
         $(this).toggleClass("open");
     });

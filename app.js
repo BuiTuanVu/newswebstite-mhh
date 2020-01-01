@@ -26,9 +26,14 @@ app.use('/admin/categories', require('./routes/admin/category_route'));
 app.use('/admin/users', require('./routes/admin/user_manager_router'));
 app.use('/admin/posts_admin', require('./routes/admin/post_admin_router'));
 app.use('/admin/tags', require('./routes/admin/admin_tags_router'));
-app.use('/user', require('./routes/user/client.router'))
+
 
 app.use('/admin', require('./routes/admin/admin_router'));
+
+
+// side for reader
+app.use('/', require('./routes/user/client.router'));
+app.use('/user', require('./routes/user/client.router'));
 app.use('/account', require('./routes/account.router'));
 
 app.use((req, res, next) => {

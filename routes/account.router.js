@@ -29,7 +29,6 @@ router.post('/register', (req, res, next) => {
   var saltRounds = 10;
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
   //   var dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
-
   var entity = {
     user_account: req.body.username,
     user_password: hash,
@@ -59,10 +58,10 @@ router.post('/login', (req, res, next) => {
     req.logIn(user, err => {
       if (err)
         return next(err);
-      if(user.user_role != 0)
+      if (user.user_role != 0)
         return res.redirect('/admin/');
-        else
-      return res.redirect('/user/home');
+      else
+        return res.redirect('/user/home');
     });
   })(req, res, next);
 })
@@ -78,7 +77,7 @@ router.get('/profile/:id', auth, (req, res, next) => {
 router.post('/profile/:id', auth, (req, res, next) => {
   var entity = {
     user_id: req.params.id,
-    
+
     user_name: req.body.UserName,
     user_mail: req.body.UserMail,
     user_sex: req.body.UserSex,

@@ -1,7 +1,9 @@
+
 <div class="loader-bg">
     <div class="loader-bar">
     </div>
 </div>
+{{#if isAuthenticated}}
 <div class="wrapper">
    
     <!-- Navbar - side bar-->
@@ -20,51 +22,7 @@
             </div>
             <!-- 4-blocks row start -->
             <div class="row m-b-30 dashboard-header">
-                <!-- <div class="col-lg-3 col-sm-6">
-                    <div class="dashboard-primary bg-primary">
-                        <div class="sales-primary">
-                            <i class="icon-bubbles"></i>
-                            <div class="f-right">
-                                <h2 class="counter">4500</h2>
-                                <span>Total Sales</span>
-                            </div>
-                        </div>
-                        <div class="bg-dark-primary">
-                            <p class="week-sales">Total SALES</p>
-                            <p class="total-sales">432</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bg-success dashboard-success">
-                        <div class="sales-success">
-                            <i class="icon-speedometer"></i>
-                            <div class="f-right">
-                                <h2 class="counter">3521</h2>
-                                <span>Last Week's Sale</span>
-                            </div>
-                        </div>
-                        <div class="bg-dark-success">
-                            <p class="week-sales">LAST WEEK'S SALES</p>
-                            <p class="total-sales ">432</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="bg-warning dasboard-warning">
-                        <div class="sales-warning">
-                            <i class="icon-basket-loaded"></i>
-                            <div class="f-right">
-                                <h2 class="counter">1085</h2>
-                                <span>New Orders</span>
-                            </div>
-                        </div>
-                        <div class="bg-dark-warning">
-                            <p class="week-sales">LAST WEEK'S SALES</p>
-                            <p class="total-sales">84</p>
-                        </div>
-                    </div>
-                </div> -->
+                
                 <div class="col-lg-3 col-sm-6">
                     <div class="col-sm-12 card dashboard-product">
                         <span>Posts</span>
@@ -401,54 +359,24 @@
         
     </div>
 </div>
-
-
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 9]>
-      <div class="ie-warning">
-          <h1>Warning!!</h1>
-          <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-          <div class="iew-container">
-              <ul class="iew-download">
-                  <li>
-                      <a href="http://www.google.com/chrome/">
-                          <img src="/assets/images/browser/chrome.png" alt="Chrome">
-                          <div>Chrome</div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="https://www.mozilla.org/en-US/firefox/new/">
-                          <img src="/assets/images/browser/firefox.png" alt="Firefox">
-                          <div>Firefox</div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="http://www.opera.com">
-                          <img src="/assets/images/browser/opera.png" alt="Opera">
-                          <div>Opera</div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="https://www.apple.com/safari/">
-                          <img src="/assets/images/browser/safari.png" alt="Safari">
-                          <div>Safari</div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                          <img src="/assets/images/browser/ie.png" alt="">
-                          <div>IE (9 & above)</div>
-                      </a>
-                  </li>
-              </ul>
-          </div>
-          <p>Sorry for the inconvenience!</p>
-      </div>
-      <![endif]-->
-<!-- Warning Section Ends -->
-
-<!-- Required Jqurey -->
+{{else}}
+<div><div class="error-404">
+    <!-- Container-fluid starts -->
+    <div class="container-fluid">
+        <!-- Row start -->
+        <div class="row">
+            <div class="text-uppercase col-xs-12">
+                <h1>401</h1>
+                <h5>Access denied!</h5>
+                <p>oops!Please login to access to this page!</p>
+                <a href="/account/login" class="btn btn-error btn-lg waves-effect">back to home page</a>
+            </div>
+        </div>
+       
+    </div>
+    
+</div> </div>
+{{/if}}
 <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
 <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
