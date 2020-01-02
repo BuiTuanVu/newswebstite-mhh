@@ -1,3 +1,4 @@
+
 <header class="main-header-top hidden-print">
     <a href="/admin/index" class="logo"><img class="img-fluid able-logo" src="/images/logo-black.png" alt="Theme-logo"></a>
     <nav class="navbar navbar-static-top">
@@ -78,9 +79,9 @@
                     </a>
                     <ul class="dropdown-menu settings-menu">
                         
-                        <li><a href="/account/profile/{{authUser.user_id}}"><i class="icon-user"></i> Profile</a></li>
+                        <li><a href="/account/profile/{{authUser.user_id}}"><i class="icon-user"></i>Profile</a></li>
                     
-                        <li><a href="/user/home"><i class="icon-logout"></i> Logout</a></li>
+                        <li><a href="/account/login"><i class="icon-logout"></i> Logout</a></li>
 
                     </ul>
                 </li>
@@ -186,35 +187,43 @@
             </li>
         </ul>
         <!-- Sidebar Menu-->
-
+        
         <div id="main-navbar">
             <ul class="sidebar-menu" id="sidebar-menu">
+                {{#switch authUser.user_role}}
+                    {{#case '1'}}
+                        <li class="nav-level">Writer</li>
 
-
-
-                <li class="nav-level">Writer</li>
-
-                <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i
-                            class="icon-docs"></i><span>Posts</span><i class="icon-arrow-down"></i></a>
-                    <ul class="treeview-menu" id="child-one">
-
-                        <li><a class="waves-effect waves-dark" href="/admin/posts/addpost_writer"><i class="icon-arrow-right"></i>Add
+                
+                        <li class="treeview active"><a class="waves-effect waves-dark" id="active" href="/admin/posts/posts_writer"><i
+                                    class="icon-docs"></i>All Posts</a></li>
+                        <li><a class="waves-effect waves-dark" href="/admin/posts/addpost_writer"><i class="icon-plus"></i>Add
                                 New Post</a></li>
-                        <li><a class="waves-effect waves-dark" href="/admin/posts/posts_writer"><i
-                                    class="icon-arrow-right"></i>All Posts</a></li>
-
-                    </ul>
-                </li>
-
-
+                       
+                    {{/case}}
+                    {{#case '2'}}
                 <li class="nav-level">Editor</li>
 
                 <li class="treeview">
-                    <a class="waves-effect waves-dark" href="/admin/drafts/drafts_editor">
-                        <i class="icon-layers"></i><span> Drafts</span>
+                    <a class="waves-effect waves-dark" href="/admin/drafts/pending-posts">
+                        <i class="icon-layers"></i><span>Pending Drafts</span>
                     </a>
                 </li>
-                <li class="nav-level">Administrator</li>
+                <li class="treeview">
+                    <a class="waves-effect waves-dark" href="/admin/drafts/published-posts">
+                        <i class="icon-check"></i><span> Published Post</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a class="waves-effect waves-dark" href="/admin/drafts/rejected-posts">
+                        <i class="icon-close"></i><span> Rejected Post</span>
+                    </a>
+                </li>
+                
+                    {{/case}}
+
+                    {{#case '3'}}
+                     <li class="nav-level">Administrator</li>
 
 
 
@@ -245,6 +254,8 @@
                                 Subscriber</a></li>
                     </ul>
                 </li>
+                    {{/case}}
+                {{/switch}}
 
             </ul>
         </div>
@@ -519,3 +530,4 @@
 {{else}}
 <div></div>
 {{/if}}
+

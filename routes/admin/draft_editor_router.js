@@ -4,100 +4,166 @@ var cateModel = require('../../models/category.model');
 const bodyParser = require('body-parser');
 var router = express.Router();
 
-router.get('/drafts_editor', (req, res) => {
-    var page = req.query.page || 1;
-    if(page < 1) page = 1;
-    var limit = 8;
+router.get('/pending-posts', (req, res) => {
 
-    var offset = (page - 1) * limit;
-
-    Promise.all([postModel.pageByNone(limit, offset),
-    postModel.countByNone()]).then(([rows,count_rows]) => {
-        var q = cateModel.allCateNoChild();
-        q.then(cates => {
-            var total = count_rows[0].total;
-            var nPages = Math.floor(total / limit);
-            if(total % limit > 0) nPages++;
-            var pages = [];
-            for(i = 1; i <= nPages; i++){
-                var obj = {value: i, active: i===+page};
-                pages.push(obj);
-            }
-            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages});
-        })
-
-    })
-    .catch(err => {
-        console.log(err);
-        res.end('error')
-    });
-    
-
-});
-
-router.get('/searchCate/:id', (req,res) => {
-    
-    var idCate = req.params.id;
+    var idStt = 0;
 
     var page = req.query.page || 1;
-    if(page < 1) page = 1;
-    var limit = 8;
-
-    var offset = (page - 1) * limit;
-
-    Promise.all([postModel.pageByCat(idCate, limit, offset),
-    postModel.countByCat(idCate)]).then(([rows,count_rows]) => {
-        var q = cateModel.allCateNoChild();
-        q.then(cates => {
-            var total = count_rows[0].total;
-            var nPages = Math.floor(total / limit);
-            if(total % limit > 0) nPages++;
-            var pages = [];
-            for(i = 1; i <= nPages; i++){
-                var obj = {value: i, active: i===+page};
-                pages.push(obj);
-            }
-            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, cate: req.params.id});
-        })
-
-    })
-    .catch(err => {
-        console.log(err);
-        res.end('error')
-    });
-});
-
-router.get('/searchStatus/:id', (req,res) => {
-    
-    var idStt = req.params.id;
-
-     var page = req.query.page || 1;
-    if(page < 1) page = 1;
+    if (page < 1) page = 1;
     var limit = 8;
 
     var offset = (page - 1) * limit;
 
     Promise.all([postModel.pageByStt(idStt, limit, offset),
-    postModel.countByStt(idStt)]).then(([rows,count_rows]) => {
+    postModel.countByStt(idStt)]).then(([rows, count_rows]) => {
         var q = cateModel.all();
         q.then(cates => {
             var total = count_rows[0].total;
             var nPages = Math.floor(total / limit);
-            if(total % limit > 0) nPages++;
+            if (total % limit > 0) nPages++;
             var pages = [];
-            for(i = 1; i <= nPages; i++){
-                var obj = {value: i, active: i===+page};
+            for (i = 1; i <= nPages; i++) {
+                var obj = { value: i, active: i === +page };
                 pages.push(obj);
             }
-            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, stt: req.params.id});
+            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, stt: 0 });
         })
 
     })
-    .catch(err => {
-        console.log(err);
-        res.end('error')
-    });
- });
+        .catch(err => {
+            console.log(err);
+            res.end('error')
+        });
+});
+
+router.get('/rejected-posts', (req, res) => {
+
+    var idStt = -1;
+
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+    var limit = 8;
+
+    var offset = (page - 1) * limit;
+
+    Promise.all([postModel.pageByStt(idStt, limit, offset),
+    postModel.countByStt(idStt)]).then(([rows, count_rows]) => {
+        var q = cateModel.all();
+        q.then(cates => {
+            var total = count_rows[0].total;
+            var nPages = Math.floor(total / limit);
+            if (total % limit > 0) nPages++;
+            var pages = [];
+            for (i = 1; i <= nPages; i++) {
+                var obj = { value: i, active: i === +page };
+                pages.push(obj);
+            }
+            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, stt: -1 });
+        })
+
+    })
+        .catch(err => {
+            console.log(err);
+            res.end('error')
+        });
+});
+
+
+router.get('/published-posts', (req, res) => {
+
+    var idStt = 1;
+
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+    var limit = 8;
+
+    var offset = (page - 1) * limit;
+
+    Promise.all([postModel.pageByStt(idStt, limit, offset),
+    postModel.countByStt(idStt)]).then(([rows, count_rows]) => {
+        var q = cateModel.all();
+        q.then(cates => {
+            var total = count_rows[0].total;
+            var nPages = Math.floor(total / limit);
+            if (total % limit > 0) nPages++;
+            var pages = [];
+            for (i = 1; i <= nPages; i++) {
+                var obj = { value: i, active: i === +page };
+                pages.push(obj);
+            }
+            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, stt: 1 });
+        })
+
+    })
+        .catch(err => {
+            console.log(err);
+            res.end('error')
+        });
+});
+
+router.get('/searchCate/:id', (req, res) => {
+
+    var idCate = req.params.id;
+
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+    var limit = 8;
+
+    var offset = (page - 1) * limit;
+
+    Promise.all([postModel.pageByCat(idCate, limit, offset),
+    postModel.countByCat(idCate)]).then(([rows, count_rows]) => {
+        var q = cateModel.allCateNoChild();
+        q.then(cates => {
+            var total = count_rows[0].total;
+            var nPages = Math.floor(total / limit);
+            if (total % limit > 0) nPages++;
+            var pages = [];
+            for (i = 1; i <= nPages; i++) {
+                var obj = { value: i, active: i === +page };
+                pages.push(obj);
+            }
+            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, cate: req.params.id });
+        })
+
+    })
+        .catch(err => {
+            console.log(err);
+            res.end('error')
+        });
+});
+
+router.get('/searchStatus/:id', (req, res) => {
+
+    var idStt = req.params.id;
+
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+    var limit = 8;
+
+    var offset = (page - 1) * limit;
+
+    Promise.all([postModel.pageByStt(idStt, limit, offset),
+    postModel.countByStt(idStt)]).then(([rows, count_rows]) => {
+        var q = cateModel.all();
+        q.then(cates => {
+            var total = count_rows[0].total;
+            var nPages = Math.floor(total / limit);
+            if (total % limit > 0) nPages++;
+            var pages = [];
+            for (i = 1; i <= nPages; i++) {
+                var obj = { value: i, active: i === +page };
+                pages.push(obj);
+            }
+            res.render('admin/vwEditor/drafts_editor', { layout: 'admin', posts: rows, cates: cates, pages, stt: req.params.id });
+        })
+
+    })
+        .catch(err => {
+            console.log(err);
+            res.end('error')
+        });
+});
 
 
 router.get('/accept/:id', (req, res) => {
@@ -125,7 +191,7 @@ router.get('/accept/:id', (req, res) => {
         }
 
         postModel.update(entity).then(n => {
-            res.redirect('/admin/drafts/drafts_editor'); //Pay attention /admin/./ not admin/./ to go out from this url
+            res.redirect('/admin/drafts/pending-posts'); //Pay attention /admin/./ not admin/./ to go out from this url
         }).catch(err => {
             console.log(err);
         });
@@ -159,7 +225,7 @@ router.get('/reject/:id', (req, res) => {
         }
 
         postModel.update(entity).then(n => {
-            res.redirect('/admin/drafts/drafts_editor'); //Pay attention /admin/./ not admin/./ to go out from this url
+            res.redirect('/admin/drafts/pending-posts'); //Pay attention /admin/./ not admin/./ to go out from this url
         }).catch(err => {
             console.log(err);
         });
@@ -167,6 +233,14 @@ router.get('/reject/:id', (req, res) => {
 });
 
 
-
+router.get('/view-detail/:id', (req, res) => {
+    postModel.single(req.params.id).then(rows => {
+        postModel.relatedPost(req.params.id).then(relatedPosts => {
+            res.render('admin/vwEditor/pre_view_draft', { title: 'NEWS', post: rows[0], relatedPosts: relatedPosts, id: req.params.id });
+        })
+    }).catch(err => {
+        console.log(err)
+    });
+});
 
 module.exports = router;

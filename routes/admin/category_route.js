@@ -1,15 +1,21 @@
 var express = require('express');
 var categoryModel = require('../../models/category.model');
+var userModel = require('../../models/user.model')
 
 var router = express.Router();
 
 
 
 router.get('/cates_admin', (req, res, next) => {
-    var p = categoryModel.all();
+    var p = categoryModel.allWithDetails();
     p.then(rows => {
-        console.log(rows);
-        res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows });
+
+        var editors = userModel.allEditorRole();
+        editors.then(editors => {
+            console.log(rows);
+            res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows, editors: editors });
+        })
+
 
     }).catch(err => {
         console.log(err);
@@ -17,22 +23,28 @@ router.get('/cates_admin', (req, res, next) => {
 
 });
 router.post('/cates_admin', (req, res) => {
-    var entity = {
-        cate_name: req.body.CateName,
-        cate_des: req.body.CateDes,
-        cate_parent: req.body.CateParent //Auto get selected value in select
-    }
+    userModel.single(req.body.CateAuthor).then(user => {
+        var entity = {
+            cate_name: req.body.CateName,
+            cate_des: req.body.CateDes,
+            cate_parent: req.body.CateParent, //Auto get selected value in select
+            user_id: req.body.CateAuthor,
+            user_name: user[0].user_name,
+        }
+        categoryModel.add(entity).then(id => {
 
-    categoryModel.add(entity).then(id => {
-
-        var p = categoryModel.all();
-        p.then(rows => {
-            res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows });
+            var p = categoryModel.all();
+            p.then(rows => {
+                var editors = userModel.allEditorRole();
+                editors.then(editors => {
+                    res.render('admin/vwAdmin/vwCategories/cates_admin', { layout: 'admin', categories: rows, editors: editors });
+                })
+            });
+        })
+    })
+        .catch(err => {
+            console.log(err);
         });
-
-    }).catch(err => {
-        console.log(err);
-    });
 });
 
 
@@ -48,13 +60,18 @@ router.get('/cate_edit/:id', (req, res, next) => {
         if (rows.length > 0) {
             var p = categoryModel.all();
             p.then(allrow => {
-                res.render('admin/vwAdmin/vwCategories/edit', {
-                    categories: allrow,
-                    error: false,
-                    category: rows[0],
-                    layout: 'admin',
+                var editors = userModel.allEditorRole();
+                editors.then(editors => {
+                    res.render('admin/vwAdmin/vwCategories/edit', {
+                        categories: allrow,
+                        error: false,
+                        category: rows[0],
+                        layout: 'admin',
+                        editors: editors
 
-                });
+                    });
+                })
+
             })
 
         } else {
@@ -71,18 +88,23 @@ router.get('/cate_edit/:id', (req, res, next) => {
 });
 
 router.post('/update', (req, res) => {
-    var entity = {
-        cate_id: req.body.CateID,
-        cate_name: req.body.CateName,
-        cate_des: req.body.CateDes,
-        cate_parent: req.body.CateParent //Auto get selected value in select
-    }
 
-    categoryModel.update(entity).then(n => {
-        res.redirect('/admin/categories/cates_admin'); //Pay attention /admin/./ not admin/./ to go out from this url
-    }).catch(err => {
-        console.log(err);
-    });
+    userModel.single(req.body.CateAuthor).then(user => {
+        var entity = {
+            cate_name: req.body.CateName,
+            cate_des: req.body.CateDes,
+            cate_parent: req.body.CateParent, //Auto get selected value in select
+            user_id: req.body.CateAuthor,
+            user_name: user[0].user_name,
+        }
+
+        categoryModel.update(entity).then(n => {
+            res.redirect('/admin/categories/cates_admin'); //Pay attention /admin/./ not admin/./ to go out from this url
+        })
+    })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 router.get('/delete/:id', (req, res) => {

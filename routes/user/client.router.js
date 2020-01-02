@@ -1,6 +1,7 @@
 var express = require('express');
 var cateModel = require('../../models/category.model');
 var postModel = require('../../models/post.client.model');
+var commentModel = require('../../models/comment.model')
 var router = express.Router();
 
 
@@ -109,47 +110,17 @@ router.get('/cate/:id', (req, res) => {
         }
     });
 
-
-
-    // var idCate = req.params.id;
-
-    // postModel.cateChild
-
-    // var page = req.query.page || 1;
-    // if (page < 1) page = 1;
-    // var limit = 8;
-
-    // var offset = (page - 1) * limit;
-
-    // Promise.all([postModel.pageByCat(idCate, limit, offset),
-    // postModel.countByCat(idCate)]).then(([rows, count_rows]) => {
-    //     var q = cateModel.all();
-    //     q.then(cates => {
-    //         var total = count_rows[0].total;
-    //         var nPages = Math.floor(total / limit);
-    //         if (total % limit > 0) nPages++;
-    //         var pages = [];
-    //         for (i = 1; i <= nPages; i++) {
-    //             var obj = { value: i, active: i === +page };
-    //             pages.push(obj);
-    //         }
-    //         res.render('user/posts', { posts: rows, cates: cates, pages });
-    //     })
-
-    // })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.end('error')
-    //     });
-
 });
 
 router.get('/posts/:id', (req, res) => {
     postModel.single(req.params.id).then(rows => {
+        postModel.getCommentOfPost(req.params.id).then(comments => {
+            postModel.relatedPost(req.params.id).then(relatedPosts => {
+                res.render('user/single_post', { title: 'NEWS', post: rows[0], relatedPosts: relatedPosts, comments: comments, num_cmt: comments.length, id: req.params.id });
+            })
 
-        postModel.relatedPost(req.params.id).then(relatedPosts => {
-            res.render('user/single_post', { title: 'NEWS', post: rows[0], relatedPosts: relatedPosts });
         })
+
 
 
     }).catch(err => {
@@ -169,21 +140,6 @@ router.get('/forgot-password', (req, res, next) => {
     res.render('admin/forgot-password', { layout: "admin" });
 });
 
-router.get('/posts', (req, res, next) => {
-    res.render('user/posts', { title: 'HOME' });
-});
-
-router.get('/single_post', (req, res, next) => {
-    var id = 6;
-    postModel.single(id).then(rows => {
-
-        res.render('user/single_post', { title: 'NEWS', post: rows[0] });
-    }).catch(err => {
-        res.end(err)
-    });
-
-});
-
 router.get('/contact', (req, res, next) => {
     res.render('user/contact', { title: 'CONTRACT' });
 });
@@ -192,6 +148,20 @@ router.get('/about', (req, res, next) => {
     res.render('user/faq', { title: 'ABOUT' });
 })
 
-
+router.post('/add-comment/:id/:user', (req, res) => {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+    var entity = {
+        id_post: req.params.id,
+        comment: req.body.comment,
+        name_user: req.params.user,
+        doc: dateTime
+    }
+    commentModel.add(entity).then(rows => {
+        res.redirect(`/posts/${req.params.id}`);
+    })
+})
 
 module.exports = router;

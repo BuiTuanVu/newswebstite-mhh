@@ -17,7 +17,7 @@ module.exports = {
 
     allWithDetails: () => {
         return db.load(
-            `select c.cate_id, c.cate_name, count(p.post_id) as num_of_post
+            `select c.cate_id, c.cate_name, c.cate_parent,c.user_name, count(p.post_id) as num_of_post
             from categories c left join posts p on c.cate_id = p.post_cate_id
             group by c.cate_id, c.cate_name`);
     },

@@ -12,16 +12,19 @@
 <section>
 	<div class="container">
 		<div class="row">
-
+ 
 			<div class="col-md-12 col-lg-8">
 				{{!-- <img src="{{post.post_image}}" alt=""> --}}
-				<h3 class="mt-30"><b>{{post.post_title}}</b></h3>
+				<h3 class="mt-0"><b>{{post.post_title}}</b></h3>
 				<ul class="list-li-mr-20 mtb-15">
 					<li>by <a href="#"><b>{{post.post_user_id}}</b></a> {{post.post_date}}</li>
 					<li><i class="color-primary mr-5 font-12 ion-ios-bolt"></i>30,190</li>
 					<li><i class="color-primary mr-5 font-12 ion-chatbubbles"></i>30</li>
 				</ul>
+                 <img class="card-img-top" src="{{post.post_image}}" alt="Card image cap"
+                                                style="height: 250px; width: 100%; display: block; margin-bottom: 10px">
 				<div id="div">
+                  
 					{{post.post_content}}
 				</div>
 
@@ -47,7 +50,7 @@
 
 				
 
-				<h4 class="p-title mt-20"><b>{{num_cmt}} COMMENTS</b></h4>
+				<h4 class="p-title mt-20"><b>03 COMMENTS</b></h4>
 				  {{#each this.comments}}
 				<div class="sided-70 mb-40">
 
@@ -91,7 +94,7 @@
 				<div class="pl-20 pl-md-0">
 					
 
-					<div class="mtb-50">
+					<div class="mtb-0">
 						<h4 class="p-title"><b>RELATED POSTS</b></h4>
 						{{#each this.relatedPosts}}
 						<a class="oflow-hidden pos-relative mb-20 dplay-block" href="/user/posts/{{post_id}}">

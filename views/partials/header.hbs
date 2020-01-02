@@ -15,7 +15,7 @@
 						<li><a class="pl-0 pl-sm-10" href="javascript: $('#frmSignout').submit();"><i class="fa fa-window-close"> Log out</i></a></li>
 						<li><a href="/account/profile/{{authUser.user_id}}"><i class="fa fa-id-card" aria-hidden="true"> Profile</i></a></li>
 						<li><span>Hi, {{authUser.user_name}}</span></li>
-						<li><span>Hi, {{authUser.user_role}}</span></li>
+						
 					</ul>
 
 					{{else}}
@@ -48,17 +48,12 @@
 			<a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
 
 			<ul class="main-menu" id="main-menu">
-				
-				{{!-- {{#each this.categories}}
-					<li><a href="">{{cate_name}}</a></li>
-				{{/each}} --}}
 				<li><a href="/user/home"><i class="fa fa-home"></i></a></li>
 				<li><a href="/user/cate/1">POLITICS & LAWS</a></li>
 				<li class="drop-down"><a href="/user/cate/2">BUSINESS<i class="ion-arrow-down-b"></i></a>
 					<ul class="drop-down-menu drop-down-inner">
 						<li><a href="/user/cate/7">ECONOMY</a></li>
-						<li><a href="/user/cate/8">INDUSTRIES</a></li>
-					
+						<li><a href="/user/cate/8">INDUSTRIES</a></li>	
 					</ul>
 				</li>
 				<li class="drop-down"><a href="/user/cate/3">TRAVEL<i class="ion-arrow-down-b"></i></a>
@@ -76,8 +71,9 @@
 				</li>
 				<li><a href="/user/cate/5">SPORTS </a></li>
 				<li><a href="/user/cate/6">WORLD</a></li>				
-				
+			
 			</ul>
+			
 			<div class="clearfix"></div>
 		</div><!-- container -->
 	</header>

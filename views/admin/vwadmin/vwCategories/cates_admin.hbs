@@ -78,9 +78,9 @@
                                     <label for="cbAuthor" class="form-control-label">Editor</label>
                                     <select class="form-control " id="cbAuthor" name="CateAuthor">
                                         <option value="0" disabled>--Choose Editor--</option>
-                                        <option>Vu Bui</option>
-                                        <option>Long Bui</option>
-
+                                        {{#each this.editors}}
+                                        <option value="{{user_id}}">{{user_name}}</option>
+                                        {{/each}}
                                     </select>
                                     <small id="emailHelp" class="form-text text-muted">The person allowed to manage
                                         posts of categories</small>
@@ -134,11 +134,9 @@
                                                     <td>{{cate_name}}</td>
                                                      <td>{{cate_des}}</td>   
                                                     <td>{{cate_parent}}</td>
-                                                    <td>20 Posts</td>
-                                                    <td class="td-status">Vu Bui</td>
+                                                    <td>{{num_of_post}}</td>
+                                                    <td class="td-status">{{user_name}}</td>
                                                     <td class="td-action">
-
-
                                                         <a class="btn btn-mini btn-warning waves-effect waves-light"
                                                             href="/admin/categories/cate_edit/{{cate_id}}" role="button">
                                                             <i class="icofont icofont-edit-alt"></i>

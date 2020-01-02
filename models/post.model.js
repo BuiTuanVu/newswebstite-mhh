@@ -31,15 +31,14 @@ module.exports = {
       FROM posts t, (SELECT @row := 0) r ORDER BY post_view DESC LIMIT ${limit}) q JOIN categories c on q.post_cate_id = c.cate_id`)
   },
 
-  newestEachCate: () => 
-  {
+  newestEachCate: () => {
     return db.load(`SELECT * FROM 
     (SELECT t.* FROM (SELECT *
         FROM (SELECT * FROM posts ORDER BY post_date DESC ) 
         AS timePost GROUP BY post_cate_id ORDER BY post_cate_id ASC LIMIT 0,10) t) s JOIN categories c on s.post_cate_id = c.cate_id`)
   },
 
-  
+
 
   allByCate: cate_id => {
     return db.load(`select * from posts where post_cate_id = ${cate_id}`);
@@ -49,7 +48,7 @@ module.exports = {
     return db.load(`select * from posts where post_stt = ${stt_id}`);
   },
 
-  cateParent: (cateChild) =>{
+  cateParent: (cateChild) => {
     return db.load(`SELECT c.cate_parent
     FROM (
         SELECT
@@ -71,21 +70,21 @@ module.exports = {
     return db.load(`select * from posts where post_cate_id = ${cate_id} limit ${limit} offset ${offset}`);
   },
 
-  getCateName: (cateid) =>{
+  getCateName: (cateid) => {
     return db.load(`select * from categories where cate_id = ${cateid}`)
   },
 
 
 
   pageByStt: (idStt, limit, offset) => {
-    return db.load(`select * from posts where post_stt = ${idStt} limit ${limit} offset ${offset}`);
+    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts where post_stt = ${idStt} limit ${limit} offset ${offset}`);
   },
 
   pageByNone: (limit, offset) => {
-    return db.load(`select * from posts limit ${limit} offset ${offset}`);
+    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts limit ${limit} offset ${offset}`);
   },
 
-  
+
 
   countByCat: cate_id => {
     return db.load(`select count(*) as total from posts where post_cate_id = ${cate_id}`);
@@ -118,4 +117,6 @@ module.exports = {
   relatedPost: id => {
     return db.load(`select * from posts where post_id != ${id} and post_stt = 1 ORDER BY RAND() LIMIT 5`)
   },
+
+
 };

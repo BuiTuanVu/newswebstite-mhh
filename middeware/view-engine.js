@@ -45,7 +45,9 @@ module.exports = function (app) {
         })
       },
 
-
+      cateLast: () => {
+        cateModel.all().then(rows => { return 1 })
+      }
     }
   }));
   app.set('view engine', 'hbs');

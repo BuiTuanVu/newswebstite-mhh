@@ -24,7 +24,19 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="#">Drafts</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="basic-table.html">All Drafts</a>
+                                <li class="breadcrumb-item"><a href="basic-table.html">
+                                    {{#switch this.stt}}
+                                    {{#case 0}}
+                                        Pending Drafts
+                                    {{/case}}
+                                    {{#case 1}}
+                                        Published Posts
+                                    {{/case}}
+                                    {{#case -1}}
+                                        Rejected Posts
+                                    {{/case}}
+                                    {{/switch}}
+                                   </a>
                                 </li>
                             </ol>
                         </div>
@@ -41,23 +53,24 @@
                             <div class="card-header">
                                 
                                 <div class="row f-right">
+                                    {{#switch this.stt}}
+                                    {{#case 0}}
                                     <div class="col-sm-2">
-                                        <h5 class="card-header-text">All Drafts</h5>
+                                        <h5 class="card-header-text">Pending Drafts</h5>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="input-group">
-                                            <select name="Status" id="Status" class="form-control" style="height:35px">
-                                                <option disabled selected value="">Status</option>
-                                                <option value="0">Pending</option>
-                                                <option value="1">Published</option>
-                                                <option value="-1">Rejected</option>
-                                            </select>
-                                            <span class="input-group-btn" id="btn-addon2"><button type="button"
-                                                    id="sttSrc"
-                                                    class="btn btn-inverse-success shadow-none addon-btn waves-effect waves-light"><i
-                                                        class="icofont icofont-document-search"></i></button></span>
-                                        </div>
+                                    {{/case}}
+                                    {{#case 1}}
+                                     <div class="col-sm-2">
+                                        <h5 class="card-header-text">Published Posts</h5>
                                     </div>
+                                    {{/case}}
+                                     {{#case -1}}
+                                     <div class="col-sm-2">
+                                        <h5 class="card-header-text">Rejected Posts</h5>
+                                    </div>
+                                    {{/case}}
+                                    {{/switch}}
+
                                     <div class="col-sm-2">
                                         <div class="input-group">
                                             <select name="Cates" id="Cates" class="form-control" style="height:35px">
@@ -113,29 +126,15 @@
                                 <div class="row">
                                     {{#each this.posts}}
                                     <div class="col-lg-3 col-sm-6">
-                                        <div class="z-depth-top-0 waves-effect" style="height: 430px">
+                                        <div class="z-depth-top-0 waves-effect" style="height: 400px">
                                             <img class="card-img-top" src="{{post_image}}" alt="Card image cap"
                                                 style="height: 160px; width: 100%; display: block;">
                                             <div class="p-5">
                                                 <h5 class="card-title">{{post_title}}</h5>
                                                 <p class="card-text">{{post_des}}</p>
-                                                <p class="card-text"><small class="text-muted">{{post_user_id}} |
-                                                        {{#formatDate post_date}} {{/formatDate}}</small></p>
+                                              <p class="card-text" style="margin-top: 1em;"><span style="color: darksalmon; font-weight:bold ">{{cate_name}}</span> |
+                                                    {{#formatDate post_date}}{{/formatDate}}</p>
                                             </div>
-
-
-
-
-
-                                            {{!-- {{#if_eq post_stt 0}}
-                                            <div class="label-main f-left m-l-1"><label
-                                                    class="label bg-warning">Pending</label></div>
-
-                                            {{else}}
-                                            <div class="label-main f-left m-l-1"><label
-                                                    class="label bg-success">Published</label></div>
-
-                                            {{/if_eq}} --}}
                                             <div style="position: absolute;bottom: -20px; align-content: center;">
                                                 <div class="f-left">
                                                     {{#switch post_stt}}
@@ -161,7 +160,7 @@
 
                                                     {{else}}
                                                     <div class="m-r-1">
-                                                        <button id="btnView" type="button"
+                                                        <button id="btnView" type="button" onclick="location.href = '/admin/drafts/view-detail/{{post_id}}'"
                                                             class="btn btn-mini btn-primary waves-effect waves-light">
                                                             <i class="icofont icofont-search-alt-2"></i>
                                                         </button>
@@ -213,135 +212,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{!-- <div class="card-block">
-                            <div class="row">
-                                <div class="col-sm-12 table-responsive">
-                                    <table class="table table-hover" id="#example">
-                                        <thead>
-                                        <tr>
-                                            
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Tags</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Heat wave sends Saigon power consumption to 10-year high</td>
-                                            <td>Business-Economy</td>
-                                            <td>_blank</td>
-                                            
-                                            <td>2019/05/03</td>
-                                            <td class="td-status">
-                                                <div class="label-main"><label class="label bg-warning" id="status">Pending</label></div>
-                                            </td>
-                                            <td class="td-action">
-                                                <button id="btnView" type="button" class="btn btn-mini btn-primary waves-effect waves-light" >
-                                                    <i class="icofont icofont-search-alt-2"></i>
-                                                </button>
-                                                <button id="btnAccept" type="button" class="btn btn-mini btn-success waves-effect waves-light">
-                                                    <i class="icofont icofont-check"></i>
-                                                </button>
-                                                
-                                                <button id="btnDelete" type="button" class="btn btn-mini btn-danger waves-effect waves-light">
-                                                    <i class="icofont icofont-close"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Japan urges Vietnam to fast track payment for Saigon metro contractor </td>
-                                            <td>Business-Economy</td>
-                                            <td>_blank</td>
-                                            <td>2019/05/02</td>
-                                            <td class="td-status">
-                                                <div class="label-main"><label class="label bg-danger">Rejected</label></div>
-                                            </td>
-                                            <td class="td-action">
-                                                    <button id="btnView" type="button" class="btn btn-mini btn-primary waves-effect waves-light" >
-                                                            <i class="icofont icofont-search-alt-2"></i>
-                                                        </button>
-                                                        <button id="btnAccept" type="button" class="btn btn-mini btn-success waves-effect waves-light">
-                                                            <i class="icofont icofont-check"></i>
-                                                        </button>
-                                                        
-                                                        <button id="btnDelete" type="button" class="btn btn-mini btn-danger waves-effect waves-light">
-                                                            <i class="icofont icofont-close"></i>
-                                                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vietnam startups to have their say at upcoming forum</td>
-                                            <td>Business-Economy</td>
-                                            <td>_blank</td>
-                                            <td>2019/05/02</td>
-                                            <td class="td-status">
-                                                <div class="label-main"><label class="label bg-success">Published</label></div>
-                                            </td>
-                                            <td class="td-action">
-                                                    <button id="btnView" type="button" class="btn btn-mini btn-primary waves-effect waves-light" >
-                                                            <i class="icofont icofont-search-alt-2"></i>
-                                                        </button>
-                                                        <button id="btnAccept" type="button" class="btn btn-mini btn-success waves-effect waves-light">
-                                                            <i class="icofont icofont-check"></i>
-                                                        </button>
-                                                        
-                                                        <button id="btnDelete" type="button" class="btn btn-mini btn-danger waves-effect waves-light">
-                                                            <i class="icofont icofont-close"></i>
-                                                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>In Saigon's hot weather, cool things sell like hot cakes</td>
-                                            <td>Business-Economy</td>
-                                            <td>_blank</td>
-                                            <td>2019/05/01</td>
-                                            <td class="td-status">
-                                                <div class="label-main"><label class="label bg-warning">Pending</label></div>
-                                            </td>
-                                            <td class="td-action">
-                                                    <button id="btnView" type="button" class="btn btn-mini btn-primary waves-effect waves-light" >
-                                                            <i class="icofont icofont-search-alt-2"></i>
-                                                        </button>
-                                                        <button id="btnAccept" type="button" class="btn btn-mini btn-success waves-effect waves-light">
-                                                            <i class="icofont icofont-check"></i>
-                                                        </button>
-                                                        
-                                                        <button id="btnDelete" type="button" class="btn btn-mini btn-danger waves-effect waves-light">
-                                                            <i class="icofont icofont-close"></i>
-                                                        </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>VN-Index plunges to lowest level in two months</td>
-                                            <td>Business-Economy</td>
-                                            <td>_blank</td>
-                                            <td>2019/05/01</td>
-                                            <td class="td-status">
-                                                <div class="label-main"><label class="label bg-warning">Pending</label></div>
-                                            </td>
-                                            <td class="td-action">
-                                                    <button id="btnView" type="button" class="btn btn-mini btn-primary waves-effect waves-light" >
-                                                            <i class="icofont icofont-search-alt-2"></i>
-                                                        </button>
-                                                        <button id="btnAccept" type="button" class="btn btn-mini btn-success waves-effect waves-light">
-                                                            <i class="icofont icofont-check"></i>
-                                                        </button>
-                                                        
-                                                        <button id="btnDelete" type="button" class="btn btn-mini btn-danger waves-effect waves-light">
-                                                            <i class="icofont icofont-close"></i>
-                                                        </button>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> --}}
+                            
                         </div>
                         <!-- Basic Table ends -->
 
@@ -356,51 +227,6 @@
         <!-- Container-fluid ends -->
     </div>
 </div>
-
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="/assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="/assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="/assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="/assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="/assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
 
 
 <!-- Required Jqurey -->
@@ -437,10 +263,6 @@
             var p = $('#Cates').val();
             window.location.href = '/admin/drafts/searchCate/' + p;
             event.preventDefault(); // This is for preventing the default behavior of links 
-
-
-
-
         });
 
         $("#sttSrc").on("click", function (event) {

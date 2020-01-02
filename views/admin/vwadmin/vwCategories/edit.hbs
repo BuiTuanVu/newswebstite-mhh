@@ -95,11 +95,11 @@
 
                                 <div class="form-group">
                                     <label for="cbAuthor" class="form-control-label">Editor</label>
-                                    <select class="form-control " id="CateAuthor" name="CateAuthor">
+                                    <select class="form-control " id="cbAuthor" name="CateAuthor">
                                         <option value="0" disabled>--Choose Editor--</option>
-                                        <option>Vu Bui</option>
-                                        <option>Long Bui</option>
-
+                                        {{#each this.editors}}
+                                        <option value="{{user_id}}">{{user_name}}</option>
+                                        {{/each}}
                                     </select>
                                     <small id="emailHelp" class="form-text text-muted">The person allowed to manage
                                         posts of categories</small>

@@ -56,7 +56,6 @@
                                         <select name="Cates" id="Cates" class="form-control" style="height:35px">
                                             <option value="" disabled selected>Categories</option>
                                             {{#each this.cates}}
-
                                             <option value="{{cate_id}}">{{cate_name}}</option>
                                             {{/each}}
 
@@ -114,8 +113,8 @@
                                         <div class="generic-card-body p-10">
                                             <h5 class="card-title">{{post_title}}</h5>
                                             <p class="card-text">{{post_des}}</p>
-                                            <p class="card-text"><small class="text-muted">{{post_cate_id}} |
-                                                    {{post_date}}</small></p>
+                                            <p class="card-text" style="margin-top: 1em;"><span style="color: darksalmon; font-weight:bold ">{{cate_name}}</span> |
+                                                    {{#formatDate post_date}}{{/formatDate}}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -13,8 +13,25 @@
         <div class="container-fluid">
             <div class="row">
                 <ol class="breadcrumb breadcrumb-title breadcrumb-arrow" style="margin: 20px">
+                       {{#switch authUser.user_role}}
+                       {{#case 0}}
                         <li class="breadcrumb-item"><a href="/user/home"><i class="icofont icofont-home"></i></a>
                         </li>
+                        {{/case}}
+                        {{#case 3}}
+                         <li class="breadcrumb-item"><a href="/admin/"><i class="icofont icofont-home"></i></a>
+                        </li>
+                        {{/case}}
+                        {{#case 2}}
+                         <li class="breadcrumb-item"><a href="/admin/"><i class="icofont icofont-home"></i></a>
+                        </li>
+                        {{/case}}
+                        {{#case 1}}
+                         <li class="breadcrumb-item"><a href="/admin/"><i class="icofont icofont-home"></i></a>
+                        </li>
+                        {{/case}}
+                      
+                        {{/switch}}
                         
                         <li class="breadcrumb-item"><a href="#">Profile</a>
                         </li>
@@ -93,7 +110,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                     <th scope="row">Active Days</th>
-                                                                    <td>{{user.day}}</td>
+                                                                    <td>{{#formatDate user.user_day}}{{/formatDate}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Full Name</th>

@@ -28,6 +28,10 @@ router.get('/is-available', (req, res, next) => {
 router.post('/register', (req, res, next) => {
   var saltRounds = 10;
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
   //   var dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
   var entity = {
     user_account: req.body.username,
@@ -35,6 +39,7 @@ router.post('/register', (req, res, next) => {
     user_name: req.body.name,
     user_mail: req.body.email,
     user_role: 0,
+    user_day: dateTime,
   }
 
   userModel.add(entity).then(id => {
@@ -86,6 +91,7 @@ router.post('/profile/:id', auth, (req, res, next) => {
     user_dob: req.body.UserDOB,
     user_web: req.body.UserWeb,
     user_social: req.body.UserSocial,
+
   }
 
   userModel.update(entity).then(n => {
