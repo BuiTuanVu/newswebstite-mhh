@@ -166,39 +166,6 @@ router.get('/searchStatus/:id', (req, res) => {
 });
 
 
-router.get('/accept/:id', (req, res) => {
-
-    var p = postModel.single(req.params.id).then(row => {
-        var cur = row[0]
-
-
-        var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        var dateTime = date + ' ' + time;
-
-        var entity = {
-            post_id: req.params.id,
-            post_title: cur.post_title,
-            post_des: cur.post_des,
-            post_content: cur.post_content,
-            post_image: cur.post_image,
-            post_cate_id: cur.post_cate_id,
-            post_tag: cur.post_tag,
-            post_user_id: cur.post_user_id,
-            post_date: dateTime,
-            post_stt: 1,
-        }
-
-        postModel.update(entity).then(n => {
-            res.redirect('/admin/drafts/pending-posts'); //Pay attention /admin/./ not admin/./ to go out from this url
-        }).catch(err => {
-            console.log(err);
-        });
-    });
-});
-
-
 
 router.get('/reject/:id', (req, res) => {
 
@@ -242,5 +209,47 @@ router.get('/view-detail/:id', (req, res) => {
         console.log(err)
     });
 });
+
+router.get('/setup/:id', (req, res) => {
+    postModel.single(req.params.id).then(rows => {
+        res.render('admin/vwEditor/setup', { title: 'NEWS', layout: 'admin', post: rows[0], id: req.params.id });
+    }).catch(err => {
+        console.log(err)
+    });
+})
+router.post('/accept/:id', (req, res) => {
+
+    var p = postModel.single(req.params.id).then(row => {
+        var cur = row[0]
+
+
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + ' ' + time;
+
+        var entity = {
+            post_id: req.params.id,
+            post_title: cur.post_title,
+            post_des: cur.post_des,
+            post_content: cur.post_content,
+            post_image: cur.post_image,
+            post_cate_id: cur.post_cate_id,
+            post_tag: cur.post_tag,
+            post_user_id: cur.post_user_id,
+            post_date: dateTime,
+            post_stt: 1,
+            post_vip: req.body.TypePost
+        }
+
+        postModel.update(entity).then(n => {
+            res.redirect('/admin/drafts/pending-posts'); //Pay attention /admin/./ not admin/./ to go out from this url
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+});
+
+
 
 module.exports = router;

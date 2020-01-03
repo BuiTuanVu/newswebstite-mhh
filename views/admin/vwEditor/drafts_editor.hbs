@@ -126,16 +126,16 @@
                                 <div class="row">
                                     {{#each this.posts}}
                                     <div class="col-lg-3 col-sm-6">
-                                        <div class="z-depth-top-0 waves-effect" style="height: 400px">
+                                        <div class="z-depth-top-0 waves-effect" style="height: 410px ; display:flex; flex-direction:column">
                                             <img class="card-img-top" src="{{post_image}}" alt="Card image cap"
                                                 style="height: 160px; width: 100%; display: block;">
-                                            <div class="p-5">
+                                            <div class="p-10" style="width: 100%;">
                                                 <h5 class="card-title">{{post_title}}</h5>
                                                 <p class="card-text">{{post_des}}</p>
-                                              <p class="card-text" style="margin-top: 1em;"><span style="color: darksalmon; font-weight:bold ">{{cate_name}}</span> |
+                                              <p class="card-text" style="margin-top: 5px;"><span style="color: darksalmon; font-weight:bold ">{{cate_name}}</span> |
                                                     {{#formatDate post_date}}{{/formatDate}}</p>
                                             </div>
-                                            <div style="position: absolute;bottom: -20px; align-content: center;">
+                                            <div style="">
                                                 <div class="f-left">
                                                     {{#switch post_stt}}
                                                     {{#case '0'}}
@@ -144,11 +144,11 @@
                                                     {{/case}}
 
                                                     {{#case '1'}}
-                                                    <div class="label-main  m-l-1"><label
+                                                    <div style="position: absolute;top:0px" class="label-main  m-l-1"><label
                                                             class="label bg-success">Published</label></div>
                                                     {{/case}}
                                                     {{#case '-1'}}
-                                                    <div class="label-main m-l-1"><label
+                                                    <div style="position: absolute;top:0px" class="label-main m-l-1"><label
                                                             class="label bg-danger">Rejected</label></div>
                                                     {{/case}}
                                                     {{/switch}}
@@ -165,7 +165,7 @@
                                                             <i class="icofont icofont-search-alt-2"></i>
                                                         </button>
                                                         <button id="btnAccept" type="button" value="btnAccept"
-                                                            onclick="location.href = '/admin/drafts/accept/{{post_id}}'"
+                                                            onclick="location.href = '/admin/drafts/setup/{{post_id}}'"
                                                             class="btn btn-mini btn-success waves-effect waves-light">
                                                             <i class="icofont icofont-check"></i>
                                                         </button>

@@ -18,7 +18,7 @@ module.exports = {
   // post for client side
   preView: (limit, offset) => {
     return db.load(`SELECT * FROM (SELECT @row := @row + 1 AS stt, t.*
-    FROM posts t, (SELECT @row := 0) r WHERE post_vip = 1 and post_stt = 1 ORDER BY post_view DESC LIMIT ${limit} offset ${offset}) q JOIN categories c on q.post_cate_id = c.cate_id`)
+    FROM posts t, (SELECT @row := 0) r WHERE post_vip = 1 and post_stt = 1 ORDER BY post_date DESC LIMIT ${limit} offset ${offset}) q JOIN categories c on q.post_cate_id = c.cate_id`)
   },
 
   recentNews: (limit, offset) => {
@@ -76,7 +76,7 @@ module.exports = {
 
 
   single: id => {
-    return db.load(`select * from posts where post_id = ${id} and post_stt = 1`);
+    return db.load(`select * , (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts where post_id = ${id} and post_stt = 1`);
   },
 
   countByCat: cate_id => {

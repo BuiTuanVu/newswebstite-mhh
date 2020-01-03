@@ -1,7 +1,7 @@
 var db = require('../utils/db');
 module.exports = {
   all: () => {
-    return db.load('select * from posts');
+    return db.load('select * from posts ORDER BY post_date');
   },
 
   allCateNoChild: () => {
@@ -41,11 +41,11 @@ module.exports = {
 
 
   allByCate: cate_id => {
-    return db.load(`select * from posts where post_cate_id = ${cate_id}`);
+    return db.load(`select * from posts where post_cate_id = ${cate_id} ORDER BY post_date`);
   },
 
   allByStt: stt_id => {
-    return db.load(`select * from posts where post_stt = ${stt_id}`);
+    return db.load(`select * from posts where post_stt = ${stt_id} ORDER BY post_date`);
   },
 
   cateParent: (cateChild) => {
@@ -77,29 +77,29 @@ module.exports = {
 
 
   pageByStt: (idStt, limit, offset) => {
-    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts where post_stt = ${idStt} limit ${limit} offset ${offset}`);
+    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts where post_stt = ${idStt} ORDER BY post_date limit ${limit} offset ${offset}`);
   },
 
   pageByNone: (limit, offset) => {
-    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts limit ${limit} offset ${offset}`);
+    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name from posts ORDER BY post_date limit ${limit} offset ${offset}`);
   },
 
 
 
   countByCat: cate_id => {
-    return db.load(`select count(*) as total from posts where post_cate_id = ${cate_id}`);
+    return db.load(`select count(*) as total from posts where post_cate_id = ${cate_id} ORDER BY post_date`);
   },
 
   countByStt: idStt => {
-    return db.load(`select count(*) as total from posts where post_stt = ${idStt}`);
+    return db.load(`select count(*) as total from posts where post_stt = ${idStt} ORDER BY post_date`);
   },
 
   countByNone: () => {
-    return db.load(`select count(*) as total from posts`);
+    return db.load(`select count(*) as total from posts ORDER BY post_date`);
   },
 
   single: id => {
-    return db.load(`select * from posts where post_id = ${id}`);
+    return db.load(`select *, (SELECT cate_name FROM categories WHERE post_cate_id = cate_id) as cate_name  from posts where post_id = ${id}`);
   },
 
   add: entity => {

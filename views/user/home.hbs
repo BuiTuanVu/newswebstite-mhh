@@ -116,6 +116,7 @@
 						{{#each this.recentNews01}}
 						{{#if_eq stt 1}}
 						<div class="">
+							<a class="oflow-hidden pos-relative mb-20 dplay-block" href="/user/posts/{{post_id}}">
 							<img src="{{post_image}}" alt="" style="height: 250px">
 							<h4 class="pt-20"><a href="#"><b>{{post_title}}</b></a></h4>
 							<ul class="list-li-mr-20 pt-10 pb-20">
@@ -125,7 +126,7 @@
 								<li><i class="color-primary mr-5 font-12 ion-ios-bolt"></i><b>{{post_view}}</b></li>
 
 							</ul>
-
+</a>
 						</div>
 						{{else}}
 						<div class="">
